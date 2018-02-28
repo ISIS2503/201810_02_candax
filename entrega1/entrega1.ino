@@ -19,6 +19,7 @@ const int pirSens = 2;
 unsigned long t1;
 unsigned long t2;
 boolean first;
+boolean first1;
 
 String keys[] = {"1234"};
 const byte ROWS = 4; 
@@ -58,6 +59,7 @@ void setup() {
   attempts = 0;
   block = false;
   first = true;
+  first1 = true;
 
 
   pinMode(redLed, OUTPUT);
@@ -77,9 +79,9 @@ void loop() {
   if(digitalRead(boton)){
     setColor(0,255,0);
     doorOpen = true;
-    if(first){
+    if(first1){
       t1 = millis();
-      first = false;
+      first1 = false;
     }
     else{
       if(millis()-t1>5000){
@@ -88,8 +90,8 @@ void loop() {
     }
   }
   else{
-    if(!first&&doorOpen){
-      first = true;
+    if(!first1&&doorOpen){
+      first1 = true;
       setColor(0,0,255);
       doorOpen = false;
     }
@@ -136,6 +138,13 @@ void loop() {
       digitalWrite(10,HIGH);
       doorOpen = true;
       Serial.println("Door opened!!");
+      if(currentKey.endsWith("*")){
+          Serial.println("si");
+      }
+      else{
+        Serial.println("no");
+      }
+      
       setColor(0,255,0);
       attempts = 0;
 
@@ -145,7 +154,7 @@ void loop() {
       }
       else{
         
-        if(millis()-t1>30000){
+        if(millis()-t1>5000){
           setColor(255,0,0);
         }
       }
@@ -158,10 +167,19 @@ void loop() {
       delay(1000);
       setColor(0,0,255);
     }
-  }else if(currentKey.length()> keys[0].length()){
-    Serial.println("Door opened!!");
-    setColor(0,255,0);
   }
+//  else if(currentKey.length()> keys[0].length()){
+////    Serial.println("Door opened!!" );
+////    Serial.println("entra a long mayor");
+//     if(doorOpen && currentKey.endsWith("*")) {
+//        doorOpen = false;
+//        Serial.println("ENTRO A CERRAR EN LONG");
+//        setColor(0,0,255);
+//        currentKey = "";
+//        first  = true;
+//     }
+////    setColor(0,255,0);
+//  }
   if(attempts>=maxAttempts) {
     block = true;
   }
@@ -177,7 +195,8 @@ void loop() {
       // We only want to print on the output change, not state
       pirState = HIGH;
     }
-  } else {
+  } 
+  else {
     digitalWrite(redLed, LOW); // turn LED OFF
     if (pirState == HIGH){
       // we have just turned of
@@ -186,7 +205,7 @@ void loop() {
       pirState = LOW;
     }
   }
-  delay(50);
+  delay(100);
 }
 
 void setColor(int redValue, int greenValue, int blueValue) {
