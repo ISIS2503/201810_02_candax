@@ -21,7 +21,7 @@ unsigned long t2;
 boolean first;
 boolean first1;
 
-String keys[] = {"1234"};
+String keys[10] = {"1234"};
 const byte ROWS = 4; 
 const byte COLS = 3;
 const byte maxAttempts = 3;
