@@ -86,6 +86,7 @@ void loop() {
     else{
       if(millis()-t1>5000){
         setColor(255,0,0);
+        Serial.println("Door open more than 30s");
       }
     }
   }
@@ -94,6 +95,7 @@ void loop() {
       first1 = true;
       setColor(0,0,255);
       doorOpen = false;
+      Serial.println("Door closed");
     }
   }
   
@@ -115,13 +117,15 @@ void loop() {
   //Verification of input and appended value
   if (customKey) {  
     currentKey+=String(customKey);
-    Serial.println(currentKey);
+    Serial.print(currentKey);
+    Serial.println("");
   }
 
   //If the current key contains '*' and door is open
   if(doorOpen && currentKey.endsWith("*")) {
     doorOpen = false;
-    Serial.println("Door closed");
+    Serial.print("Door closed");
+    Serial.println("");
     setColor(0,0,255);
     currentKey = "";
     first  = true;
@@ -129,7 +133,8 @@ void loop() {
   //If the current key contains '#' reset attempt
   if(currentKey.endsWith("#")&&currentKey.length()<=keys[0].length()) {
     currentKey = "";
-    Serial.println("Attempt deleted");
+    Serial.print("Attempt deleted");
+    Serial.println("");
   }
 
   //If current key matches the key length
@@ -137,7 +142,8 @@ void loop() {
     if(currentKey == keys[0]) {
       digitalWrite(10,HIGH);
       doorOpen = true;
-      Serial.println("Door opened!!");
+      Serial.print("Door opened!!");
+      Serial.println("");
       if(currentKey.endsWith("*")){
           Serial.println("si");
       }
@@ -162,7 +168,8 @@ void loop() {
     else {
       attempts++;
       currentKey = "";
-      Serial.println("Number of attempts: "+String(attempts));
+      Serial.print("Number of attempts: "+String(attempts));
+      Serial.println("");
       setColor(255,0,0);
       delay(1000);
       setColor(0,0,255);
@@ -184,14 +191,12 @@ void loop() {
     block = true;
   }
 
-
-  
   if (digitalRead(pirSens)) {            // check if the input is HIGH
     digitalWrite(redLed, HIGH);  // turn LED ON
     if (pirState == LOW) {
       // we have just turned on
       Serial.println("Motion detected!");
-      
+     
       // We only want to print on the output change, not state
       pirState = HIGH;
     }
