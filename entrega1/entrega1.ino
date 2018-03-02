@@ -154,10 +154,10 @@ void loop() {
     if(currentKey == keys[0] ||currentKey == keys[1]||currentKey == keys[2]||currentKey == keys[3] ) {
       digitalWrite(10,HIGH); 
       doorOpen = true;
-      if(printOpen){
-           Serial.print("Door opened!!");
-           printOpen = false;
-      }
+
+      Serial.print("Door opened!!");
+      printOpen = false;
+      
      
 
       if(currentKey.endsWith("*")){
@@ -179,7 +179,11 @@ void loop() {
         if(millis()-t1>5000){
           setColor(255,0,0);
           //door opened for too long 
-          Serial.println("Door open more than 30s");
+          if(printOpen){
+            Serial.println("Door open more than 30s");
+            printOpen  = false;
+          }
+          
         }
       }
     }
