@@ -183,7 +183,7 @@ void loop() {
           //door opened for too long 
           if(printOpen1){
             Serial.println("Door open more than 30s");
-            printOpen  = false;
+            printOpen1  = false;
           }
           
         }
