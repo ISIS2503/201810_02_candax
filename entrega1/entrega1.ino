@@ -9,6 +9,7 @@ int len;
 int pirState = LOW;
 const int boton = 11;
 
+
 const int redLed = 14;
 const int redPin= 13;
 const int greenPin = 12;
@@ -20,6 +21,8 @@ unsigned long t1;
 unsigned long t2;
 boolean first;
 boolean first1;
+boolean printOpen;
+
 
 String keys[10] = {"1234"};
 const byte ROWS = 4; 
@@ -60,6 +63,8 @@ void setup() {
   block = false;
   first = true;
   first1 = true;
+  printOpen = true;
+
 
 
   pinMode(redLed, OUTPUT);
@@ -86,11 +91,16 @@ void loop() {
     else{
       if(millis()-t1>5000){
         setColor(255,0,0);
-        Serial.println("Door open more than 30s");
+        if(printOpen){
+          Serial.println("Door open more than 30s");
+          printOpen=false;
+        }
+        
       }
     }
   }
   else{
+    printOpen = true;
     if(!first1&&doorOpen){
       first1 = true;
       setColor(0,0,255);
@@ -125,6 +135,7 @@ void loop() {
   if(doorOpen && currentKey.endsWith("*")) {
     doorOpen = false;
     Serial.print("Door closed");
+    doorOpen = false;
     Serial.println("");
     setColor(0,0,255);
     currentKey = "";
@@ -162,6 +173,8 @@ void loop() {
         
         if(millis()-t1>5000){
           setColor(255,0,0);
+          //door opened for too long 
+          Serial.println("Door open more than 30s");
         }
       }
     }
@@ -175,18 +188,6 @@ void loop() {
       setColor(0,0,255);
     }
   }
-//  else if(currentKey.length()> keys[0].length()){
-////    Serial.println("Door opened!!" );
-////    Serial.println("entra a long mayor");
-//     if(doorOpen && currentKey.endsWith("*")) {
-//        doorOpen = false;
-//        Serial.println("ENTRO A CERRAR EN LONG");
-//        setColor(0,0,255);
-//        currentKey = "";
-//        first  = true;
-//     }
-////    setColor(0,255,0);
-//  }
   if(attempts>=maxAttempts) {
     block = true;
   }
