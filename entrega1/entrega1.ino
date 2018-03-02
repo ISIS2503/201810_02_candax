@@ -24,7 +24,7 @@ boolean first1;
 boolean printOpen;
 
 
-String keys[10] = {"1234"};
+String keys[4] = {"1234","0000","6346","1111"};
 const byte ROWS = 4; 
 const byte COLS = 3;
 const byte maxAttempts = 3;
@@ -136,6 +136,7 @@ void loop() {
     doorOpen = false;
     Serial.print("Door closed");
     doorOpen = false;
+    printOpen = true;
     Serial.println("");
     setColor(0,0,255);
     currentKey = "";
@@ -150,11 +151,15 @@ void loop() {
 
   //If current key matches the key length
   if (currentKey.length()== keys[0].length()) {
-    if(currentKey == keys[0]) {
-      digitalWrite(10,HIGH);
+    if(currentKey == keys[0] ||currentKey == keys[1]||currentKey == keys[2]||currentKey == keys[3] ) {
+      digitalWrite(10,HIGH); 
       doorOpen = true;
-      Serial.print("Door opened!!");
-      Serial.println("");
+      if(printOpen){
+           Serial.print("Door opened!!");
+           printOpen = false;
+      }
+     
+
       if(currentKey.endsWith("*")){
           Serial.println("si");
       }
