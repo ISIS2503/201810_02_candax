@@ -22,6 +22,7 @@ unsigned long t2;
 boolean first;
 boolean first1;
 boolean printOpen;
+boolean printOpen1;
 
 
 String keys[4] = {"1234","0000","6346","1111"};
@@ -64,6 +65,7 @@ void setup() {
   first = true;
   first1 = true;
   printOpen = true;
+  printOpen1 = true;
 
 
 
@@ -136,7 +138,7 @@ void loop() {
     doorOpen = false;
     Serial.print("Door closed");
     doorOpen = false;
-    printOpen = true;
+    printOpen1 = true;
     Serial.println("");
     setColor(0,0,255);
     currentKey = "";
@@ -179,7 +181,7 @@ void loop() {
         if(millis()-t1>5000){
           setColor(255,0,0);
           //door opened for too long 
-          if(printOpen){
+          if(printOpen1){
             Serial.println("Door open more than 30s");
             printOpen  = false;
           }
