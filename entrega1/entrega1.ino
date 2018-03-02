@@ -156,7 +156,7 @@ void loop() {
       doorOpen = true;
 
       Serial.print("Door opened!!");
-      printOpen = false;
+     
       
      
 
