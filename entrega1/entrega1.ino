@@ -91,7 +91,7 @@ void loop() {
       first1 = false;
     }
     else{
-      if(millis()-t1>5000){
+      if(millis()-t1>30000){
         setColor(255,0,0);
         if(printOpen){
           Serial.println("Door open more than 30s");
@@ -178,7 +178,7 @@ void loop() {
       }
       else{
         
-        if(millis()-t1>5000){
+        if(millis()-t1>30000){
           setColor(255,0,0);
           //door opened for too long 
           if(printOpen1){
