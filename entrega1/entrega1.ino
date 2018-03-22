@@ -94,7 +94,7 @@ void loop() {
       first1 = false;
     }
     else{
-      if(millis()-t1>5000){
+      if(millis()-t1>30000){
         setColor(255,0,0);
         digitalWrite(buzzer, HIGH);
         delay(1000);
@@ -186,7 +186,7 @@ void loop() {
       }
       else{
         
-        if(millis()-t1>5000){
+        if(millis()-t1>30000){
           setColor(255,0,0);
           digitalWrite(buzzer, HIGH);
           delay(1000);
