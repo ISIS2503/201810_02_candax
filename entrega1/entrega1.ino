@@ -2,7 +2,6 @@
 
 #include <Keypad.h>
 
-
 //const String KEY = "1234";
 int numPasswords = 10;
 int len;
@@ -10,12 +9,14 @@ int pirState = LOW;
 const int boton = 11;
 
 
-const int redLed = 14;
+const int redLed = 14; //movement
+const int redLed2 = 15; //battery
 const int redPin= 13;
 const int greenPin = 12;
 const int bluePin = 10;
 const int pirSens = 2;
-
+const int battery = 16; //reads Battery
+const int buzzer = 17;
 
 unsigned long t1;
 unsigned long t2;
@@ -66,14 +67,15 @@ void setup() {
   first1 = true;
   printOpen = true;
   printOpen1 = true;
-
-
-
+  
   pinMode(redLed, OUTPUT);
+  pinMode(redLed2, OUTPUT);
+  pinMode(buzzer, OUTPUT);
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
   pinMode(pirSens , INPUT);
+
 
   pinMode(boton,INPUT);
 
@@ -81,7 +83,8 @@ void setup() {
 }
 
 void loop() {
-
+  int battery = analogRead(A2);
+  float voltage = battery * (5.0/1023.0);  
   char customKey;
   if(digitalRead(boton)){
     setColor(0,255,0);
@@ -93,6 +96,8 @@ void loop() {
     else{
       if(millis()-t1>5000){
         setColor(255,0,0);
+        digitalWrite(buzzer, HIGH);
+        delay(1000);
         if(printOpen){
           Serial.println("Door open more than 30s");
           printOpen=false;
@@ -108,6 +113,7 @@ void loop() {
       setColor(0,0,255);
       doorOpen = false;
       Serial.println("Door closed");
+      digitalWrite(buzzer, LOW);
     }
   }
   
@@ -119,8 +125,10 @@ void loop() {
   else {
     Serial.println("Number of attempts exceeded");
     setColor(255,0,0);
+    digitalWrite(buzzer, HIGH);
     delay(30000);
     setColor(0,0,255);
+    digitalWrite(buzzer, LOW);
     currentKey = "";
     attempts = 0; 
     block=false;
@@ -180,6 +188,8 @@ void loop() {
         
         if(millis()-t1>5000){
           setColor(255,0,0);
+          digitalWrite(buzzer, HIGH);
+          delay(1000);
           //door opened for too long 
           if(printOpen1){
             Serial.println("Door open more than 30s");
@@ -195,8 +205,10 @@ void loop() {
       Serial.print("Number of attempts: "+String(attempts));
       Serial.println("");
       setColor(255,0,0);
+      digitalWrite(buzzer, HIGH);
       delay(1000);
       setColor(0,0,255);
+      digitalWrite(buzzer, LOW);
     }
   }
   if(attempts>=maxAttempts) {
@@ -205,6 +217,8 @@ void loop() {
 
   if (digitalRead(pirSens)) {            // check if the input is HIGH
     digitalWrite(redLed, HIGH);  // turn LED ON
+    digitalWrite(buzzer, HIGH);
+    delay(1000);
     if (pirState == LOW) {
       // we have just turned on
       Serial.println("Motion detected!");
@@ -215,12 +229,27 @@ void loop() {
   } 
   else {
     digitalWrite(redLed, LOW); // turn LED OFF
+    digitalWrite(buzzer, LOW);
     if (pirState == HIGH){
       // we have just turned of
       Serial.println("Motion ended!");
       // We only want to print on the output change, not state
       pirState = LOW;
     }
+  }
+
+  //Battery
+  if(voltage < 1.2)
+  {
+    digitalWrite(redLed2, HIGH);
+    digitalWrite(buzzer, HIGH);
+    delay(2000);
+    Serial.println("Low Battery");
+  }
+  else
+  {
+    digitalWrite(redLed2, LOW);
+    digitalWrite(buzzer, LOW);
   }
   delay(100);
 }
