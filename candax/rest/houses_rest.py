@@ -10,7 +10,7 @@ import tornado.escape
 import candax.rest as rest
 
 LOGGER = logging.getLogger(__name__)
-bucket = 'alarms'
+bucket = 'houses'
 
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
@@ -19,6 +19,8 @@ class MainHandler(rest.BaseHandler):
     @tornado.gen.coroutine
     def get(self, _, _id=None):
         # print("MSG: {0}".format(self.application.db is None))
+        print(_id)
+        #bucket = 'test'
         if _id is None:
             objs = yield self.application.db.get_all(bucket)
         else:
