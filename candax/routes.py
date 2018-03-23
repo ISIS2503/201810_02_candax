@@ -22,7 +22,7 @@ import candax.rest.alarms_rest as alarms_rest
 
 # Define new rest associations
 REST = [
-    (r'/alarms(/?(\s+)?)', alarms_rest.MainHandler)
+    (r'/alarms(/?(.+)?)', alarms_rest.MainHandler)
 ]
 
 # Define new web rendering route associations

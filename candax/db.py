@@ -42,7 +42,7 @@ class RiakDB:
     @threadexecute
     def get(self, bucket, key):
         bucket = self.client.bucket(bucket)
-        return bucket.get(key)
+        return bucket.get(key).data
 
     @threadexecute
     def update(self, bucket, d):
@@ -50,7 +50,7 @@ class RiakDB:
         obj = bucket.get(d['key'])
         obj.data = d
         obj.store()
-        return bucket.get(d['key'])
+        return bucket.get(d['key']).data
 
     @threadexecute
     def delete(self, bucket, key):
