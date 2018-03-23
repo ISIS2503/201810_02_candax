@@ -9,7 +9,7 @@ client = mqtt.Client("C1")
 client.connect("172.24.41.153", port = 8083)
 
 #Subscribes the client to all the topics defined on node-red flow
-client.subscribe("alarms.high.res1.casa1")
+client.subscribe("alarmas.res1.casa1")
 client.subscribe("alarms/high/res1/casa1")
 #client.subscribe("low/house1/doorOpen")
 #client.subscribe("medium/house1/permissionDenied")
@@ -25,5 +25,5 @@ client.on_message = on_message
 
 #Start the loop of the client
 client.loop_start()
-#time.sleep(1000)
-#client.loop_stop()
+time.sleep(1000)
+client.loop_stop()

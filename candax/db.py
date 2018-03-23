@@ -59,3 +59,21 @@ class RiakDB:
         ret = obj.data
         obj.delete()
         return ret
+
+
+#    Propietario: request_id = res_unit; houseX
+#    Admin: request_id = res_unitX
+    @threadexecute
+    def get_all_user(self, bucket, request_id, type):
+        bucket = self.client.bucket(bucket)
+        ret = []
+        parts = request_id.split(';')
+        for key in bucket.get_keys():
+            act = bucket.get(key).data
+            print(act['res_unit'])
+            print(act['house'])
+            if type == 'Admin' and act['res_unit'] == parts[0]:
+                ret.append(act)
+            elif type == 'Owner' and act['res_unit'] == parts[0] and act['house'] == parts[1]:
+                ret.append(act)
+        return ret

@@ -8,6 +8,7 @@ import datetime
 import tornado.web
 import tornado.escape
 import candax.rest as rest
+import uuid
 
 LOGGER = logging.getLogger(__name__)
 bucket = 'hubs'
@@ -32,7 +33,8 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def post(self, *args):
-        #bucket = 'test'
+        k = str(uuid.uuid1().int)
+        self.json_args['key'] = k
         _id = yield self.application.db.insert(bucket, self.json_args)
         # if self.json_args is not None:
         #   ret, perm, email, _type = yield self.authenticate('administrador')

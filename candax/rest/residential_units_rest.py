@@ -8,6 +8,7 @@ import datetime
 import tornado.web
 import tornado.escape
 import candax.rest as rest
+import uuid
 
 LOGGER = logging.getLogger(__name__)
 bucket = 'residential_units'
@@ -53,8 +54,8 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def put(self, *args):
-        # print("MSG: {0}".format(self.application.db is None))
-        #bucket = 'test'
+        k = str(uuid.uuid1().int)
+        self.json_args['key'] = k
         objs = yield self.application.db.update(bucket, self.json_args)
         # self.set_status(403)
         print(objs)

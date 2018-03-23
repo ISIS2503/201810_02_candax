@@ -11,17 +11,15 @@ import candax.rest as rest
 import uuid
 
 LOGGER = logging.getLogger(__name__)
-bucket = 'locks'
+bucket = 'administrators'
 
-class MainHandler(rest.BaseHandler):
+class  MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
         self.db = db
 
     @tornado.gen.coroutine
     def get(self, _, _id=None):
         # print("MSG: {0}".format(self.application.db is None))
-        print(_id)
-        #bucket = 'test'
         if _id is None:
             objs = yield self.application.db.get_all(bucket)
         else:
@@ -33,6 +31,7 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def post(self, *args):
+        #alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
         k = str(uuid.uuid1().int)
         self.json_args['key'] = k
         _id = yield self.application.db.insert(bucket, self.json_args)
