@@ -32,6 +32,6 @@ class BaseHandler(tornado.web.RequestHandler):
         if 'Content-Type' in self.request.headers:
             if self.request.headers["Content-Type"].startswith("application/json"):
                LOGGER.debug("Got JSON")
-               self.json_args = json.loads(self.request.body)
+               self.json_args = json.loads(self.request.body.decode('utf-8'))
             else:
                self.json_args = None
