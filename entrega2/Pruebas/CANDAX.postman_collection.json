@@ -1,0 +1,893 @@
+{
+	"info": {
+		"name": "CANDAX",
+		"_postman_id": "a3287fc3-2d0e-4653-a223-e5fe8720d216",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Owners",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/owners",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"owners"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET Alarms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/alarms",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"alarms"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET Hubs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/hubs",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"hubs"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET Locks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/locks",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"locks"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET Houses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/houses",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"houses"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET Residential_Units",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/residentialUnits",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"residentialUnits"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET Administrators",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/administrators",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"administrators"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET Owner Alarms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/history/owners/207151278260952131929972798801626716091",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"history",
+						"owners",
+						"207151278260952131929972798801626716091"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET Admin Alarms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/history/administrators/336670061545536089789895004263692031931",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"history",
+						"administrators",
+						"336670061545536089789895004263692031931"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET ONE Residential_Units",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/residentialUnits/164803293617653465595628858738389473211",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"residentialUnits",
+						"164803293617653465595628858738389473211"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET ONE Houses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/houses/179326448839536607648582837251141457851",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"houses",
+						"179326448839536607648582837251141457851"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET ONE Hubs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/hubs/6226411531002726239008152846449694651",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"hubs",
+						"6226411531002726239008152846449694651"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET ONE Locks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"pepito\"}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/locks/36493569330273563231622802924108175291",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"locks",
+						"36493569330273563231622802924108175291"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST Owner",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Owner6\",\n\t\"res_unit\": \"RU5\",\n\t\"house\": \"H5\"\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/owners",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"owners"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST Administrators",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Admin2\",\n\t\"res_unit\": \"RU1\"\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/administrators",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"administrators"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST Residential_unit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"RU4\",\n\t\"address\": \"Cra 783a 4b 67\",\n\t\"houses\": [\"H1\",\"H2\"],\n\t\"admin\": \"Admin1\",\n\t\"private_security\":\"PS1\"\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/residentialUnits",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"residentialUnits"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST Houses",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"house\": \"H2\",\n\t\"res_unit\":\"RU2\",\n\t\"id\": \"HB3234\",\n\t\"hub\": \"HB1\",\n\t\"users\": [\"US1\",\"US2\"]\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/houses",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"houses"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST Hubs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"house\": \"H1\",\n\t\"res_unit\": \"UR2\",\n\t\"id\": \"HB3234\",\n\t\"hub\": \"HB1\",\n\t\"frecuency\": 34,\n\t\"fails\": 3,\n\t\"users\": [\"US1\",\"US2\"]\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/hubs",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"hubs"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST Locks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"house\": \"H2\",\n\t\"residential_unit\":\"RU1\",\n\t\"batery\": 80,\n\t\"block\": false,\n\t\"passwords\":[\"1234\",\"0000\",\"9876\"],\n\t\"access_time\": [\"22:00 - 11:59\"]\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/locks",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"locks"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST alarms",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"house\": \"H2\",\n\t\"res_unit\":\"RU1\",\n\t\"type\": \"OPEN DOOR\",\n\t\"date\": \"17:21 17-10-2018\"\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/alarms",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"alarms"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Residential_unit",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"key\":\"164803293617653465595628858738389473211\",\n\t\"name\": \"RU4\",\n\t\"address\": \"Cra 56a 4b 67\",\n\t\"houses\": [\"H1\",\"H2\"],\n\t\"admin\": \"Admin1\",\n\t\"private_security\":\"PS1\"\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/residentialUnits/164803293617653465595628858738389473211",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"residentialUnits",
+						"164803293617653465595628858738389473211"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Houses",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"key\": \"288356986803515259386858869234166323131\",\n\t\"house\": \"H1\",\n\t\"res_unit\":\"RU2\",\n\t\"id\": \"HB3234\",\n\t\"hub\": \"HB1\",\n\t\"users\": [\"US1\",\"US2\"]\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/houses/288356986803515259386858869234166323131",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"houses",
+						"288356986803515259386858869234166323131"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Hubs",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"key\": \"6226411531002726239008152846449694651\",\n\t\"house\": \"H1\",\n\t\"res_unit\": \"UR2\",\n\t\"id\": \"HB0000\",\n\t\"hub\": \"HB1\",\n\t\"frecuency\": 34,\n\t\"fails\": 3,\n\t\"users\": [\"US1\",\"US2\"]\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/hubs/6226411531002726239008152846449694651",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"hubs",
+						"6226411531002726239008152846449694651"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Locks",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"key\": \"36493569330273563231622802924108175291\",\n\t\"house\": \"H2\",\n\t\"residential_unit\":\"RU1\",\n\t\"batery\": 80,\n\t\"block\": false,\n\t\"passwords\":[\"1234\",\"0000\",\"9876\"],\n\t\"access_time\": [\"12:00 - 11:59\"]\n}"
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/locks/36493569330273563231622802924108175291",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"locks",
+						"36493569330273563231622802924108175291"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Owners",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/owners/15138891162659218826102567141835724731",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"owners",
+						"15138891162659218826102567141835724731"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Administrators",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/administrators/248096159717526149661163787316057528251",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"administrators",
+						"248096159717526149661163787316057528251"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Residential_Units",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/residentialUnits/164803293617653465595628858738389473211",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"residentialUnits",
+						"164803293617653465595628858738389473211"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Houses",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/houses/179326448839536607648582837251141457851",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"houses",
+						"179326448839536607648582837251141457851"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Hubs",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/hubs/6226411531002726239008152846449694651",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"hubs",
+						"6226411531002726239008152846449694651"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Locks",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://172.24.41.149:8000/locks/36493569330273563231622802924108175291",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"41",
+						"149"
+					],
+					"port": "8000",
+					"path": [
+						"locks",
+						"36493569330273563231622802924108175291"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
