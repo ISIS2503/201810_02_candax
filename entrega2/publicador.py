@@ -2,8 +2,9 @@
 import paho.mqtt.client as mqtt
 import time 
 import numpy as np
+import datetime
 #Creates the client
-client = mqtt.Client("C1")
+client = mqtt.Client("C3")
 
 print("conectando...")
 #Connects to the mosquitto server on port 8083
@@ -16,15 +17,21 @@ high = "alarm/high/res1/house1"
 medium = "alarm/low/res1/house1"
 low = "alarm/medium/res1/house1"
 
-priors = [low,medium,high]
-
+priors = [high,medium,high,low]
+al1 = "\",\"lowBattery\": {\"data\":\"Low Battery\", \"hubId\" :1, \"house\" : \"casa1\",\"res_unit\":\"res1\",\"type\":\"high\"}}"
+al2 = "\",\"permissionDenied\": {\"data\":\"Number of attempts exceeded\", \"hubId\" :1, \"house\" : \"casa1\",\"res_unit\":\"res1\",\"type\":\"medium\"}}"
+al3 = "\",\"suspiciousMotion\": {\"data\":\"Motion detected!\", \"hubId\" :1, \"house\" : \"casa1\",\"res_unit\":\"res1\",\"type\":\"high\"}}"
+al4 = "\",\"doorOpen\": {\"data\":\"Door open more than 30s\", \"hubId\" :1, \"house\" : \"casa1\",\"res_unit\":\"res1\",\"type\":\"low\"}}"
+alarmas = [al1,al2,al3,al4]
 cont = 0
 
 while True:
     print("entra while")
-    payload = str(np.random.random()) + priors[cont%3]
-    client.publish(priors[cont%3], payload= payload, qos=0, retain=False)
+    st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+    payload = "{\"time\":\"" + st + alarmas[cont%4]
+    client.publish(priors[cont%4], payload= payload, qos=0, retain=False)
     print(payload)
-    cont += 0
-    time.sleep(3000)
+    cont += 1
+    time.sleep(3)
+    print("sale de while")
 #Definition of on_message
