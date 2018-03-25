@@ -13,14 +13,14 @@ print("Conectando a " + IP + " en el puerto "+ str(puerto) + "...")
 client.connect(IP, port = puerto)
 print("Conectado.")
 #Subscribes the client to all the topics defined on node-red flow
-client.subscribe("alarm/high/res1/house1")
-client.subscribe("alarm/low/res1/house1")
-client.subscribe("alarm/medium/res1/house1")
+client.subscribe("alarm.high.res1.house1")
+client.subscribe("alarm.low.res1.house1")
+client.subscribe("alarm.medium.res1.house1")
 
 
 #Definition of on_message
 def on_message(client, data, message):
-    topic = message.topic.split("/")
+    topic = message.topic.split(".")
     if(topic[1] == "high"):
         print("To: yale@candax.com")
         print("message topic: " + message.topic)
