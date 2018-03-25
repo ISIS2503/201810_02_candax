@@ -15,6 +15,7 @@ app = Flask(__name__)
 @app.route('/mail', methods=['POST'])
 def restSendEmail():
     # sendMail(request.json)
+    print(request.json)
     return jsonify(request.json)
 
 
@@ -28,9 +29,9 @@ def sendMail(jsonFile):
     usr = info["mail"]
     password = info["pass"]
 
-    data = jsonFile["Data"]
-    subject = jsonFile["Subject"]
-    to1 = jsonFile["To"]
+    data = jsonFile["data"]
+    subject = jsonFile["subject"]
+    to1 = jsonFile["to"]
 
     msg = MIMEText(data)
     msg['Subject'] = subject
