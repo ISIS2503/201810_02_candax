@@ -20,10 +20,20 @@ client.subscribe("alarm/medium/res1/house1")
 
 #Definition of on_message
 def on_message(client, data, message):
-    print("entra on message")
-    print("message received: " + str(message.payload.decode("utf-8")))
+    topic = message.topic.split("/")
+    if(topic[1] == "high"):
+        print("To: yale@candax.com")
+        print("message topic: " + message.topic)
+        print("message received: " + str(message.payload.decode("utf-8")))
+        print(" ")
+        print("To: admin@candax.com")
+        print("message topic: " + message.topic)
+        print("message received: " + str(message.payload.decode("utf-8")))
+        print(" ")
+    print("To: usuario1@candax.com")
     print("message topic: " + message.topic)
-    print("message qos: " + str(message.qos))
+    print("message received: " + str(message.payload.decode("utf-8")))
+    print(" ")
 
 #The client starts reading the message from the topics
 client.on_message = on_message
