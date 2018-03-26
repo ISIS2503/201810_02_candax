@@ -20,10 +20,12 @@ const int buzzer = 17;
 
 unsigned long t1;
 unsigned long t2;
+unsigned long t3;
 boolean first;
 boolean first1;
 boolean printOpen;
 boolean printOpen1;
+boolean first2;
 
 
 String keys[4] = {"1234","0000","6346","1111"};
@@ -65,6 +67,7 @@ void setup() {
   block = false;
   first = true;
   first1 = true;
+  first2 = true;
   printOpen = true;
   printOpen1 = true;
   
@@ -94,7 +97,7 @@ void loop() {
       first1 = false;
     }
     else{
-      if(millis()-t1>30000){
+      if(millis()-t1>5000){
         setColor(255,0,0);
         digitalWrite(buzzer, HIGH);
         delay(1000);
@@ -126,7 +129,7 @@ void loop() {
     Serial.println("Number of attempts exceeded");
     setColor(255,0,0);
     digitalWrite(buzzer, HIGH);
-    delay(30000);
+    delay(5000);
     setColor(0,0,255);
     digitalWrite(buzzer, LOW);
     currentKey = "";
@@ -144,7 +147,7 @@ void loop() {
   //If the current key contains '*' and door is open
   if(doorOpen && currentKey.endsWith("*")) {
     doorOpen = false;
-    Serial.print("Door closed");
+    Serial.println("Door closed");
     doorOpen = false;
     printOpen1 = true;
     Serial.println("");
@@ -155,7 +158,7 @@ void loop() {
   //If the current key contains '#' reset attempt
   if(currentKey.endsWith("#")&&currentKey.length()<=keys[0].length()) {
     currentKey = "";
-    Serial.print("Attempt deleted");
+    Serial.println("Attempt deleted");
     Serial.println("");
   }
 
@@ -165,11 +168,8 @@ void loop() {
       digitalWrite(10,HIGH); 
       doorOpen = true;
 
-      Serial.print("Door opened!!");
-     
+      Serial.println("Door opened!!");
       
-     
-
       if(currentKey.endsWith("*")){
           Serial.println("si");
       }
@@ -186,7 +186,7 @@ void loop() {
       }
       else{
         
-        if(millis()-t1>30000){
+        if(millis()-t1>5000){
           setColor(255,0,0);
           digitalWrite(buzzer, HIGH);
           delay(1000);
@@ -241,15 +241,29 @@ void loop() {
   //Battery
   if(voltage < 1.2)
   {
-    digitalWrite(redLed2, HIGH);
-    digitalWrite(buzzer, HIGH);
-    delay(2000);
+    if(first2)
+    {
+      t3 = millis();
+      first2 = false;
+    }
+    if(millis() - t3 > 5000)
+    {
+      digitalWrite(buzzer, LOW);
+    }
+    else
+    {
+      digitalWrite(buzzer, HIGH);
+      digitalWrite(redLed2, HIGH);
+      delay(2000);
+    }
+    //digitalWrite(redLed2, HIGH);
     Serial.println("Low Battery");
   }
   else
   {
     digitalWrite(redLed2, LOW);
     digitalWrite(buzzer, LOW);
+    first2 = true;
   }
   delay(100);
 }

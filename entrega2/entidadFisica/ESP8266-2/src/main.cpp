@@ -3,7 +3,7 @@
 
 //DEFINES
 #define TOPIC_SUBSCRIBE        "yale.uniandes.ml337.key"
-#define TOPIC_PUBLISH          "yale.uniandes.ml337.alarm"
+#define TOPIC_PUBLISH          "alarms.res1.house1"//"yale.uniandes.ml337.alarm"
 #define SIZE_BUFFER_DATA       50
 
 //VARIABLES
@@ -18,11 +18,11 @@ WiFiClient    clientWIFI;
 PubSubClient  clientMQTT(clientWIFI);
 
 // CONFIG WIFI
-const char* ssid = "MiRedWifi";
-const char* password = "123456";
+const char* ssid = "POLLITO";
+const char* password = "marlucas";
 
 // CONFIG MQTT
-IPAddress serverMQTT (192,168,0,13);
+IPAddress serverMQTT (192,168,0,10);
 const uint16_t portMQTT = 8083;
 // const char* usernameMQTT = "admin";
 // const char* passwordMQTT = "admin";
