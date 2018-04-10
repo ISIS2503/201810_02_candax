@@ -8,7 +8,6 @@ int len;
 int pirState = LOW;
 const int boton = 11;
 
-
 const int redLed = 22; //movement
 const int redLed2 = 24; //battery
 const int redPin= 13;
@@ -25,8 +24,9 @@ boolean first1;
 boolean printOpen;
 boolean printOpen1;
 
+String str; //String que lee por serial
+String comandoActual[3]={"","",""}; //Informacion actual de los comandos
 
-//String keys[4] = {"1234","0000","6346","1111"};
 const byte ROWS = 4; 
 const byte COLS = 3;
 const byte maxAttempts = 3;
@@ -59,6 +59,7 @@ boolean block;
 
 void setup() {
   Serial.begin(9600);
+  deleteAllPasswords();
   currentKey = "";
   doorOpen = false;
   attempts = 0;
@@ -67,6 +68,7 @@ void setup() {
   first1 = true;
   printOpen = true;
   printOpen1 = true;
+  str = "";
   
   pinMode(redLed, OUTPUT);
   pinMode(redLed2, OUTPUT);
@@ -247,7 +249,33 @@ void loop() {
     digitalWrite(buzzer, LOW);
   }
 
-  
+  if (Serial.available() > 0 ) {
+    // read the incoming byte:
+    str = Serial.readString();
+    processCommand(str);
+
+    if(comandoActual[0] == "CHANGE_PASS"){
+      Serial.println("Change password");
+      int temp_index = comandoActual[1].toInt();
+      int temp_key = comandoActual[2].toInt();
+      updatePassword(temp_key,temp_index);
+    }
+    else if(comandoActual[0] == "ADD_PASS"){
+      Serial.println("Add password");
+      int temp_index = comandoActual[1].toInt();
+      int temp_key = comandoActual[2].toInt();
+      addPassword(temp_key,temp_index);
+    }
+    else if(comandoActual[0] == "DEL_PASS"){
+      Serial.println("Delete password");
+      int temp_index = comandoActual[1].toInt();
+      deletePassword(temp_index);
+    }
+    //Serial.println(compareKey("5678"));
+    //Serial.println(compareKey("1234"));
+    //Serial.println(compareKey("0000"));
+    //Serial.println(compareKey("1111"));
+  }
   
   delay(100);
 }
@@ -285,16 +313,15 @@ boolean compareKey(String key) {
 }
 
 // Methods that divides the command by parameters
-void processCommand(String* result, String command) {
-  char buf[sizeof(command)];
-  String vars = "";
-  vars.toCharArray(buf, sizeof(buf));
-  char *p = buf;
-  char *str;
+void processCommand(String command) {
+  char temp[command.length()];
+  command.toCharArray(temp, command.length());
+  char* p;
   int i = 0;
-  while ((str = strtok_r(p, ";", &p)) != NULL) {
-    // delimiter is the semicolon
-    result[i++] = str;
+  p = strtok(temp,";");
+  while(p != NULL){
+    comandoActual[i++] = p;
+    p = strtok(NULL,";");
   }
 }
 

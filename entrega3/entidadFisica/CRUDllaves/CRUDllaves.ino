@@ -6,6 +6,7 @@
 int incomingByte1 = 0; 
 int incomingByte2 = 0; 
 
+
 String str1 = "";
 
 String comandoActual[3]={"","",""};
