@@ -9,14 +9,14 @@ int pirState = LOW;
 const int boton = 11;
 
 
-const int redLed = 14; //movement
-const int redLed2 = 15; //battery
+const int redLed = 22; //movement
+const int redLed2 = 24; //battery
 const int redPin= 13;
 const int greenPin = 12;
 const int bluePin = 10;
 const int pirSens = 2;
-const int battery = 16; //reads Battery
-const int buzzer = 17;
+const int battery = A0; //reads Battery
+const int buzzer = 26;
 
 unsigned long t1;
 unsigned long t2;
@@ -151,7 +151,7 @@ void loop() {
     first  = true;
   }
   //If the current key contains '#' reset attempt
-  if(currentKey.endsWith("#")&&currentKey.length()<=keys[0].length()) {
+  if(currentKey.endsWith("#")&&currentKey.length()<=5) {
     currentKey = "";
     Serial.print("Attempt deleted");
     Serial.println("");
