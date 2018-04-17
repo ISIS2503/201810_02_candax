@@ -35,6 +35,7 @@ REST = [
     (r'/houses(/?(.+)?)', houses_rest.MainHandler),
     (r'/hubs(/?(.+)?)', hubs_rest.MainHandler),
     (r'/locks(/?(.+)?)', locks_rest.MainHandler),
+	(r'/owners/?(.+)?/passwords/(/?(.+)?)', password_rest.MainHandler),
     (r'/owners(/?(.+)?)', owners_rest.MainHandler),
     (r'/administrators(/?(.+)?)', administrators_rest.MainHandler),
     (r'/history/owners/?(.+)?', alarms_owner_rest.MainHandler), #Propietario

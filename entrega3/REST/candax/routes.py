@@ -27,6 +27,8 @@ import candax.rest.alarms_admin_rest as alarms_admin_rest
 import candax.rest.administrators_rest as administrators_rest
 import candax.rest.owners_rest as owners_rest
 import candax.rest.passwords_rest as passwords_rest
+import candax.rest.yale_rest as yale_rest
+import candax.rest.private_security_rest as private_security_rest
 # import candax.rest as rest
 
 # Define new rest associations
@@ -34,6 +36,8 @@ REST = [
     (r'/alarms(/?(.+)?)', alarms_rest.MainHandler), #YALE
     (r'/residentialUnits(/?(.+)?)', residential_units_rest.MainHandler),
     (r'/houses(/?(.+)?)', houses_rest.MainHandler),
+	(r'/yale(/?(.+)?)', yale_rest.MainHandler),
+	(r'/privateSecurity(/?(.+)?)', private_security_rest.MainHandler),
     (r'/hubs(/?(.+)?)', hubs_rest.MainHandler),
     (r'/locks(/?(.+)?)', locks_rest.MainHandler),
     (r'/owners(/?(.+)?)', owners_rest.MainHandler),
