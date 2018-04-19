@@ -8,6 +8,7 @@ import datetime
 import tornado.web
 import tornado.escape
 import candax.rest as rest
+from candax.auth import jwtauth
 import uuid
 
 LOGGER = logging.getLogger(__name__)
@@ -15,6 +16,7 @@ bucket = 'passwords'
 
 
 # alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
+@jwtauth
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
         self.db = db

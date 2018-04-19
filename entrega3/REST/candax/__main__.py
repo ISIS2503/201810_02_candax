@@ -8,7 +8,10 @@ import os
 import sys
 import logging
 import argparse
+import jwt
+import datetime
 import os.path as osp
+from candax.auth import jwtauth
 
 # Tornado imports
 import tornado.web
@@ -48,11 +51,13 @@ clr = 'clear'
 if os.name == 'nt':
     clr = 'cls'
 
+SECRET = 'my_secret_key'
+
 
 def main():
     logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
     settings = {"static_path": os.path.join(
-        os.path.dirname(__file__), "static")}
+        os.path.dirname(__file__), "static"), "xsrf_cookies": True, }
     application = tornado.web.Application(
         ROUTES, debug=True, serve_traceback=True, autoreload=True,
         **settings)

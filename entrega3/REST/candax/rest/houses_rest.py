@@ -8,11 +8,14 @@ import datetime
 import tornado.web
 import tornado.escape
 import candax.rest as rest
+from candax.auth import jwtauth
 import uuid
 
 LOGGER = logging.getLogger(__name__)
 bucket = 'houses'
 
+
+@jwtauth
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
         self.db = db
@@ -21,7 +24,7 @@ class MainHandler(rest.BaseHandler):
     def get(self, _, _id=None):
         # print("MSG: {0}".format(self.application.db is None))
         print(_id)
-        #bucket = 'test'
+        # bucket = 'test'
         if _id is None:
             objs = yield self.application.db.get_all(bucket)
         else:
@@ -56,7 +59,7 @@ class MainHandler(rest.BaseHandler):
     @tornado.gen.coroutine
     def put(self, *args):
         # print("MSG: {0}".format(self.application.db is None))
-        #bucket = 'test'
+        # bucket = 'test'
         objs = yield self.application.db.update(bucket, self.json_args)
         # self.set_status(403)
         print(objs)
@@ -66,10 +69,10 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def delete(self, _, _id=None):
-        #bucket = 'test'
+        # bucket = 'test'
         print(_id)
         if _id is None:
-            #objs = yield self.application.db.get_all(bucket)
+            # objs = yield self.application.db.get_all(bucket)
             print('no hay naditaaaaa')
         else:
             objs = yield self.application.db.delete(bucket, _id)
