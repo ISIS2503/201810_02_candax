@@ -2,10 +2,14 @@
     JSON Web Token auth for Tornado
 """
 import jwt
+import json
+from six.moves.urllib.request import urlopen
 
+AUTH0_DOMAIN = 'isis2503-sjimenez16.auth0.com'
+API_AUDIENCE = 'uniandes.edu.co/candax'
+ALGORITHMS = ["RS256"]
 AUTHORIZATION_HEADER = 'Authorization'
 AUTHORIZATION_METHOD = 'bearer'
-SECRET_KEY = "my_secret_key"
 INVALID_HEADER_MESSAGE = "invalid header authorization"
 MISSING_AUTHORIZATION_KEY = "Missing authorization"
 AUTHORIZATION_ERROR_CODE = 401
@@ -58,6 +62,7 @@ def jwtauth(handler_class):
         def require_auth(handler, kwargs):
 
             auth = handler.request.headers.get(AUTHORIZATION_HEADER)
+            print(auth)
             if auth:
                 parts = auth.split()
 
@@ -65,14 +70,42 @@ def jwtauth(handler_class):
                     return_header_error(handler)
 
                 token = parts[1]
-                try:
-                    jwt.decode(
-                        token,
-                        SECRET_KEY,
-                        options=jwt_options
-                    )
-                except Exception as err:
-                    return_auth_error(handler, str(err))
+                jsonurl = urlopen("https://"+AUTH0_DOMAIN+"/.well-known/jwks.json")
+                jwks = json.loads(jsonurl.read())
+                unverified_header = jwt.get_unverified_header(token)
+                print('*************')
+                rsa_key = {}
+                print(type(jwks))
+                # count = 0
+                print(unverified_header)
+                # for key in jwks.keys():
+                #     print(count)
+                #     if key["kid"] == unverified_header["kid"]:
+                #         print('entrooooo')
+                #         rsa_key = {
+                #             "kty": key["kty"],
+                #             "kid": key["kid"],
+                #             "use": key["use"],
+                #             "n": key["n"],
+                #             "e": key["e"]
+                #         }
+                #
+                #     count += 1
+
+                print('---------------')
+                # print(rsa_key)
+                if rsa_key:
+                    try:
+                        payload = jwt.decode(
+                            token,
+                            rsa_key,
+                            algorithms=ALGORITHMS,
+                            audience=API_AUDIENCE,
+                            issuer="https://"+AUTH0_DOMAIN+"/"
+                        )
+                        print(payload)
+                    except Exception as err:
+                        return_auth_error(handler, str(err))
 
             else:
                 handler._transforms = []
