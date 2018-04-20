@@ -7,6 +7,7 @@ import logging
 import datetime
 import tornado.web
 import tornado.escape
+import tornado.httpclient as httpclient
 import candax.rest as rest
 from candax.auth import jwtauth
 import uuid
@@ -35,6 +36,11 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def post(self, *args):
+        client = httpclient.HTTPClient()
+        request = httpclient.HTTPRequest(url='mi url de P3',
+                                         method ='POST',
+                                         body=self.json_args)
+        response = client.fetch(request)
         k = str(uuid.uuid1().int)
         self.json_args['key'] = k
         _id = yield self.application.db.insert(bucket, self.json_args)
