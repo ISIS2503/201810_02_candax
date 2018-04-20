@@ -42,5 +42,6 @@ class MainHandler(rest.BaseHandler):
         """
             return the generated token
         """
+        print('PINNGGG')
         response = {'token': self.encoded.decode('ascii')}
         self.write(response)

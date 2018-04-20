@@ -28,6 +28,9 @@ import coloredlogs
 parser = argparse.ArgumentParser(
     description='Un servidor muy bonito')
 
+# pbc://172.24.41.149:8087
+# pbc://localhost:8087
+
 parser.add_argument('--riak-url', type=str, default='pbc://172.24.41.149:8087',
                     help='Riak url endpoint used to locate DB')
 parser.add_argument('--port', type=int, default=8000,
@@ -51,13 +54,11 @@ clr = 'clear'
 if os.name == 'nt':
     clr = 'cls'
 
-SECRET = 'my_secret_key'
-
 
 def main():
     logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
     settings = {"static_path": os.path.join(
-        os.path.dirname(__file__), "static"), "xsrf_cookies": True, }
+        os.path.dirname(__file__), "static"), "xsrf_cookies": False, }
     application = tornado.web.Application(
         ROUTES, debug=True, serve_traceback=True, autoreload=True,
         **settings)

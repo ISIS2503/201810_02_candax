@@ -10,7 +10,9 @@ class clientMQTT:
         self.client = mqtt.Client(client_name)
         print(url.hostname)
         print(url.port)
+        print('connecting...')
         self.client.connect(url.hostname, port=url.port)
+        print('connected')
         self.topic = 'yale.uniandes.ml337.key'
 
     def publish_message(self, message):
