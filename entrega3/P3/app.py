@@ -22,7 +22,7 @@ api = Api(app)
 resource_fields = {
     'owner':   fields.String,
     'pos':    fields.Integer,
-    'pass':   fields.Integer,
+    'pass':   fields.String,
     'hi': fields.DateTime,
     'hf': fields.DateTime
 
@@ -62,11 +62,14 @@ class Passwd(Resource):
         }
         if(args["hi"]< str(datetime.now())):
             PASSWORDS_ACTIVOS.append(pwd) 
+            ordenarPorHf(PASSWORDS_ACTIVOS)
             # post('http://localhost:5000/todo1', data=pwd).json()   
             
         
         else:
             PASSWORDS_INACTIVOS.append(pwd)
+            ordenarPorHi(PASSWORDS_INACTIVOS)
+
         return pwd, 200
 
 
@@ -94,7 +97,18 @@ api.add_resource(Passwd, '/pwds')
 def record_loop(loop_on):
    while True:
       if loop_on.value == True:
-         print("loop running")
+        ya = str(datetime.now())
+        while(PASSWORDS_ACTIVOS[0]["hf"]<ya):
+            pwd = PASSWORDS_ACTIVOS.pop(0)
+            pwd["pass"] = "0000"
+            # post('http://localhost:5000/todo1', data=pwd).json()   
+        while(PASSWORDS_INACTIVOS[0]["hi"]<ya):
+            pwd = PASSWORDS_INACTIVOS.pop(0)
+            # post('http://localhost:5000/todo1', data=pwd).json()   
+
+
+
+
       time.sleep(1)
 
 if __name__ == '__main__':
