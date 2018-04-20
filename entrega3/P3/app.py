@@ -1,16 +1,104 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
-from requests import put, get
+from requests import put, get, post
+from flask_restful import fields, marshal_with
+from datetime import datetime
+from flask_restful import reqparse
+from multiprocessing import Process, Value
+import time
+
+def ordenarPorHi(arr):
+    arr.sort(key = lambda x : x['hi'])
+
+
+def ordenarPorHf(arr):
+    arr.sort(key = lambda x : x['hf'])
+
 
 
 app = Flask(__name__)
 api = Api(app)
 
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
+resource_fields = {
+    'owner':   fields.String,
+    'pos':    fields.Integer,
+    'pass':   fields.Integer,
+    'hi': fields.DateTime,
+    'hf': fields.DateTime
 
-api.add_resource(HelloWorld, '/')
+}
+
+PASSWORDS_ACTIVOS = []
+PASSWORDS_INACTIVOS = []
+
+
+parser = reqparse.RequestParser()
+parser.add_argument('owner')
+parser.add_argument('pos')
+parser.add_argument('pass')
+parser.add_argument('hi')
+parser.add_argument('hf')
+
+
+class Passwd(Resource):
+    # def get(self, pwds_id):
+    #     # abort_if_todo_doesnt_exist(pwds_id)
+    #     return TODOS[pwds_id]
+
+    # def delete(self, pwds_id):
+    #     # abort_if_todo_doesnt_exist(pwds_id)
+    #     del TODOS[pwds_id]
+    #     return '', 204
+
+    # @marshal_with(resource_fields)
+    def post(self):
+        args = parser.parse_args()
+        # task = {'task': args['task']}
+        pwd = { "owner" : args["owner"],
+                "pos" : args["pos"],
+                "pass" : args["pass"],
+                "hi" : args["hi"],
+                "hf" : args["hf"],
+        }
+        if(args["hi"]< str(datetime.now())):
+            PASSWORDS_ACTIVOS.append(pwd) 
+            # post('http://localhost:5000/todo1', data=pwd).json()   
+            
+        
+        else:
+            PASSWORDS_INACTIVOS.append(pwd)
+        return pwd, 200
+
+
+# TodoList
+# shows a list of all todos, and lets you POST to add new tasks
+# class TodoList(Resource):
+#     def get(self):
+#         return TODOS
+
+#     def post(self):
+#         args = parser.parse_args()
+#         pwds_id = int(max(TODOS.keys()).lstrip('todo')) + 1
+#         pwds_id = 'todo%i' % pwds_id
+#         TODOS[pwds_id] = {'task': args['task']}
+#         return TODOS[pwds_id], 201
+
+##
+## Actually setup the Api resource routing here
+##
+# api.add_resource(TodoList, '/pwds')
+api.add_resource(Passwd, '/pwds')
+
+
+
+def record_loop(loop_on):
+   while True:
+      if loop_on.value == True:
+         print("loop running")
+      time.sleep(1)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    recording_on = Value('b', True)
+    p = Process(target=record_loop,args=(recording_on,))
+    p.start() 
+    app.run(debug=True, use_reloader=False)
