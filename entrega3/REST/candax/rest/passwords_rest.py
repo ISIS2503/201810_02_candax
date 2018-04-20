@@ -15,7 +15,7 @@ LOGGER = logging.getLogger(__name__)
 bucket = 'passwords_history'
 bucket_o ='owners'
 
-@jwtauth
+
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
         self.db = db
