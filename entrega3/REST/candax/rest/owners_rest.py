@@ -36,7 +36,10 @@ class MainHandler(rest.BaseHandler):
     def post(self, *args):
         #alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
         k = str(uuid.uuid1().int)
+        passwords= {'1':'', '2':'','3':'','4':'','5':'','6':'','7':'','8':'','9':'','10':'','11':'','12':'','13':'', '14':''
+        ,'15':'','16':'','17':'','18':'','19':'','20':''}
         self.json_args['key'] = k
+        self.json_args['passwords'] = passwords
         _id = yield self.application.db.insert(bucket, self.json_args)
         # if self.json_args is not None:
         #   ret, perm, email, _type = yield self.authenticate('administrador')
