@@ -1,188 +1,89 @@
-from flask import Flask, request, jsonify
-from flask_restful import Resource, Api
-from requests import put, get, post
-from flask_restful import fields, marshal_with
-from datetime import datetime
-from flask_restful import reqparse
-# from multiprocessing import Process, Value
-import time
-import threading
+# -*- coding: utf-8 -*-
+
+import os
+import sys
 import json
+import logging
+import datetime
+import tornado.web
+import tornado.escape
+import tornado.httpclient as httpclient
+import candax.rest as rest
+from candax.auth import jwtauth
+import uuid
 
-def ordenarPorHi(arr):
-    arr.sort(key = lambda x : x['hi'])
-
-
-def ordenarPorHf(arr):
-    arr.sort(key = lambda x : x['hf'])
-
-
-
-app = Flask(__name__)
-api = Api(app)
-
+LOGGER = logging.getLogger(__name__)
+bucket = 'passwords'
 
 
-# resource_fields = {
-#     'owner':   fields.String,
-#     'pos':    fields.Integer,
-#     'pass':   fields.String,
-#     'hi': fields.DateTime,
-#     'hf': fields.DateTime
+# alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
+@jwtauth
+class MainHandler(rest.BaseHandler):
+    def initialize(self, db=None):
+        self.db = db
 
-# }
-
-
-@app.before_first_request
-def activate_job():
-    def run_job():
-        while True:
-            # print("activas " + str(len(PASSWORDS_ACTIVOS))+ " pasivas " + str(len(PASSWORDS_INACTIVOS)))
-            ya = str(datetime.now())
-            print(ya + " activos " + str(len(PASSWORDS_ACTIVOS)) + " inactivos " + str(len(PASSWORDS_INACTIVOS)))
-            if(len(PASSWORDS_ACTIVOS)>=1):
-                while(len(PASSWORDS_ACTIVOS)>=1 and PASSWORDS_ACTIVOS[0]["hf"]<ya):
-                    print("entra a sacar activo")
-                    pwd = PASSWORDS_ACTIVOS.pop(0)
-                    pwd["pass"] = "0000"
-                    print(pwd)
-                    print(json.dumps(pwd))
-                    post('http://localhost:8000/publishPasswords', json=(pwd))
-            if(len(PASSWORDS_INACTIVOS)>=1):
-                while(len(PASSWORDS_INACTIVOS)>=1 and PASSWORDS_INACTIVOS[0]["hi"]<ya):
-                    print("entra a sacar inactivo")
-                    pwd = PASSWORDS_INACTIVOS.pop(0)
-                    PASSWORDS_ACTIVOS.append(pwd)
-                    print(pwd)
-                    print(json.dumps(pwd))
-                    post('http://localhost:8000/publishPasswords', json=(pwd))
-
-            time.sleep(3)
-
-    thread = threading.Thread(target=run_job)
-    thread.start()
-
-def start_runner():
-    def start_loop():
-        not_started = True
-        while not_started:
-            print('In start loop')
-            try:
-                r = get('http://localhost:5000/pwds')
-                if r.status_code == 200:
-                    print('Server started, quiting start_loop')
-                    not_started = False
-                print(r.status_code)
-            except:
-                print('Server not yet started')
-            time.sleep(2)
-
-    print('Started runner')
-    thread = threading.Thread(target=start_loop)
-    thread.start()
-
-
-PASSWORDS_ACTIVOS = []
-PASSWORDS_INACTIVOS = []
-
-
-parser = reqparse.RequestParser()
-parser.add_argument('owner')
-parser.add_argument('pos')
-parser.add_argument('pass')
-parser.add_argument('hi')
-parser.add_argument('hf')
-
-
-class Passwd(Resource):
-    # def get(self, pwds_id):
-    #     # abort_if_todo_doesnt_exist(pwds_id)
-    #     return TODOS[pwds_id]
-
-    # def delete(self, pwds_id):
-    #     # abort_if_todo_doesnt_exist(pwds_id)
-    #     del TODOS[pwds_id]
-    #     return '', 204
-
-    # @marshal_with(resource_fields)
-    def post(self):
-        global PASSWORDS_ACTIVOS, PASSWORDS_INACTIVOS
-        args = parser.parse_args()
-        # task = {'task': args['task']}
-        pwd = { "owner" : args["owner"],
-                "pos" : args["pos"],
-                "pass" : args["pass"],
-                "hi" : args["hi"],
-                "hf" : args["hf"],
-        }
-        if(args["hi"]< str(datetime.now())):
-            print("aaaaaaa" + args["hi"] +  str(datetime.now()))
-            print("bbbbbbbb" + str(args["hi"]< str(datetime.now())))
-            print("entra activos post")
-            PASSWORDS_ACTIVOS.append(pwd)
-            ordenarPorHf(PASSWORDS_ACTIVOS)
-            print(pwd)
-            print(json.dumps(pwd))
-            post('http://localhost:8000/publishPasswords', json=pwd)
-# 
-
+    @tornado.gen.coroutine
+    def get(self, _, _id=None):
+        # print("MSG: {0}".format(self.application.db is None))
+        if _id is None:
+            objs = yield self.application.db.get_all(bucket)
         else:
-            print("aaaaaaa" + args["hi"] +  str(datetime.now()))
-            print("bbbbbbbb" + str((args["hi"]< str(datetime.now()))))
-            print("entra inactivos post")
-            PASSWORDS_INACTIVOS.append(pwd)
-            ordenarPorHi(PASSWORDS_INACTIVOS)
+            objs = yield self.application.db.get(bucket, _id)
+        # self.set_status(403)
+        objs = json.dumps(objs)
+        self.set_header('Content-Type', 'text/javascript;charset=utf-8')
+        self.write(objs)
 
-        return pwd, 200
-        
-    def get(self):
-        return "up and running",200
+    @tornado.gen.coroutine
+    def post(self, *args):
+        client = httpclient.HTTPClient()
+        request = httpclient.HTTPRequest(url='mi url de P3',
+                                         method ='POST',
+                                         body=self.json_args)
+        response = client.fetch(request)
+        k = str(uuid.uuid1().int)
+        self.json_args['key'] = k
+        _id = yield self.application.db.insert(bucket, self.json_args)
+        print('Voy a enviar!')
+        self.application.clientMQTT.publish_message(self.json_args['pass'])
+        # if self.json_args is not None:
+        #   ret, perm, email, _type = yield self.authenticate('administrador')
+        #   if perm:
+        #     edgarin= aerolinea.Aerolinea.from_json(self.json_args)
+        #     response= yield tm.registrar_aerolinea(edgarin)
+        #     self.set_status(201)
+        #     response = response.json()
+        #   else:
+        #     response = tornado.escape.json_encode(ret)
+        #     self.set_status(403)
+        # else:
+        #   self.set_status(400)
+        #   response = "Error: Content-Type must be application/json"
+        # response = "Unknown"
+        self.set_header('Content-Type', 'text/javascript;charset=utf-8')
+        self.write(_id)
 
+    @tornado.gen.coroutine
+    def put(self, *args):
+        # print("MSG: {0}".format(self.application.db is None))
+        # bucket = 'test'
+        objs = yield self.application.db.update(bucket, self.json_args)
+        # self.set_status(403)
+        print(objs)
+        objs = json.dumps(objs)
+        self.set_header('Content-Type', 'text/javascript;charset=utf-8')
+        self.write(objs)
 
-# TodoList
-# shows a list of all todos, and lets you POST to add new tasks
-# class TodoList(Resource):
-#     def get(self):
-#         return TODOS
-
-#     def post(self):
-#         args = parser.parse_args()
-#         pwds_id = int(max(TODOS.keys()).lstrip('todo')) + 1
-#         pwds_id = 'todo%i' % pwds_id
-#         TODOS[pwds_id] = {'task': args['task']}
-#         return TODOS[pwds_id], 201
-
-##
-## Actually setup the Api resource routing here
-##
-# api.add_resource(TodoList, '/pwds')
-api.add_resource(Passwd, '/pwds')
-
-
-
-# def record_loop(loop_on):
-#    while True:
-#       if loop_on.value == True:
-        # ya = str(datetime.now())
-        # print(ya + " activos " + str(len(PASSWORDS_ACTIVOS)) + " inactivos " + str(len(PASSWORDS_INACTIVOS)))
-        # if(len(PASSWORDS_ACTIVOS)>=1):
-        #     while(len(PASSWORDS_ACTIVOS)>=1 and PASSWORDS_ACTIVOS[0]["hf"]<ya):
-        #         pwd = PASSWORDS_ACTIVOS.pop(0)
-        #         pwd["pass"] = "0000"
-        #         # post('http://localhost:8000/passwords', data=pwd).json()
-        # if(len(PASSWORDS_INACTIVOS)>=1):
-        #     while(len(PASSWORDS_INACTIVOS)>=1 and PASSWORDS_INACTIVOS[0]["hi"]<ya):
-        #         pwd = PASSWORDS_INACTIVOS.pop(0)
-        #         # post('http://localhost:8000/passwords', data=pwd).json()
-
-
-
-
-#       time.sleep(1)
-
-if __name__ == '__main__':
-    # recording_on = Value('b', True)
-    # p = Process(target=record_loop,args=(recording_on,))
-    # p.start()
-    start_runner()
-    app.run(debug=True)
+    @tornado.gen.coroutine
+    def delete(self, _, _id=None):
+        # bucket = 'test'
+        print(_id)
+        if _id is None:
+            # objs = yield self.application.db.get_all(bucket)
+            print('no hay naditaaaaa')
+        else:
+            objs = yield self.application.db.delete(bucket, _id)
+        # self.set_status(403)
+        objs = json.dumps(objs)
+        self.set_header('Content-Type', 'text/javascript;charset=utf-8')
+        self.write(objs)

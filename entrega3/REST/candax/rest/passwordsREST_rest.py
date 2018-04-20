@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 import sys
 import json
@@ -7,12 +5,13 @@ import logging
 import datetime
 import tornado.web
 import tornado.escape
+import tornado.httpclient as httpclient
 import candax.rest as rest
-import uuid
 from candax.auth import jwtauth
+import uuid
 
 LOGGER = logging.getLogger(__name__)
-bucket = 'alarms'
+bucket = 'passwords'
 
 
 # alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
@@ -35,9 +34,16 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def post(self, *args):
+        client = httpclient.HTTPClient()
+        request = httpclient.HTTPRequest(url='mi url de P3',
+                                         method ='POST',
+                                         body=self.json_args)
+        response = client.fetch(request)
         k = str(uuid.uuid1().int)
         self.json_args['key'] = k
         _id = yield self.application.db.insert(bucket, self.json_args)
+        print('Voy a enviar!')
+        self.application.clientMQTT.publish_message(self.json_args['pass'])
         # if self.json_args is not None:
         #   ret, perm, email, _type = yield self.authenticate('administrador')
         #   if perm:
