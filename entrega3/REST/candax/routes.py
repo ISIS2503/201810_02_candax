@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-15 -*-
+    # -*- coding: iso-8859-15 -*-
 
 """
 routes
@@ -27,6 +27,7 @@ import candax.rest.alarms_admin_rest as alarms_admin_rest
 import candax.rest.administrators_rest as administrators_rest
 import candax.rest.owners_rest as owners_rest
 import candax.rest.passwords_rest as passwords_rest
+import candax.rest.passwords2_rest as passwords2_rest
 import candax.rest.yale_rest as yale_rest
 import candax.rest.private_security_rest as private_security_rest
 import candax.rest.auth_rest as auth_rest
@@ -45,10 +46,9 @@ REST = [
     (r'/administrators(/?(.+)?)', administrators_rest.MainHandler),
     (r'/history/owners/?(.+)?', alarms_owner_rest.MainHandler), #Propietario
     (r'/history/administrators/?(.+)?', alarms_admin_rest.MainHandler), #Admin
-    (r'/password(/?(.+)?)', passwords_rest.MainHandler), #, #YALE
+    (r'/passwords(/?(.+)?)', passwords2_rest.MainHandler),  #YALE
+    (r'/publishPasswords(/?(.+)?)', passwords_rest.MainHandler),  #YALE
     (r'/auth(/?(.+)?)', auth_rest.MainHandler)
-    # (r'/password/owners/?(.+)?', passwords_owners_rest.MainHandler), #Propietario
-    # (r'/password/administrators/?(.+)?', passwords_administrators_rest.MainHandler) #Admin
 ]
 
 # Define new web rendering route associations

@@ -12,10 +12,9 @@ from candax.auth import jwtauth
 import uuid
 
 LOGGER = logging.getLogger(__name__)
-bucket = 'passwords'
+bucket = 'owners'
 
 
-# alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
 @jwtauth
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
@@ -35,11 +34,13 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def post(self, *args):
+        #alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
         k = str(uuid.uuid1().int)
+        passwords= {'1':'', '2':'','3':'','4':'','5':'','6':'','7':'','8':'','9':'','10':'','11':'','12':'','13':'', '14':''
+        ,'15':'','16':'','17':'','18':'','19':'','20':''}
         self.json_args['key'] = k
+        self.json_args['passwords'] = passwords
         _id = yield self.application.db.insert(bucket, self.json_args)
-        print('Voy a enviar!')
-        self.application.clientMQTT.publish_message(self.json_args['pass'])
         # if self.json_args is not None:
         #   ret, perm, email, _type = yield self.authenticate('administrador')
         #   if perm:
@@ -60,7 +61,7 @@ class MainHandler(rest.BaseHandler):
     @tornado.gen.coroutine
     def put(self, *args):
         # print("MSG: {0}".format(self.application.db is None))
-        # bucket = 'test'
+        #bucket = 'test'
         objs = yield self.application.db.update(bucket, self.json_args)
         # self.set_status(403)
         print(objs)
@@ -70,10 +71,10 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def delete(self, _, _id=None):
-        # bucket = 'test'
+        #bucket = 'test'
         print(_id)
         if _id is None:
-            # objs = yield self.application.db.get_all(bucket)
+            #objs = yield self.application.db.get_all(bucket)
             print('no hay naditaaaaa')
         else:
             objs = yield self.application.db.delete(bucket, _id)
