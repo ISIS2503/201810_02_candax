@@ -41,7 +41,7 @@ class MainHandler(rest.BaseHandler):
         response = client.fetch(request)
 
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
-        self.write(_id)
+        self.write(self.json_args)
 
     @tornado.gen.coroutine
     def put(self, *args):
