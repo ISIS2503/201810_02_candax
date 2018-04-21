@@ -35,29 +35,11 @@ class MainHandler(rest.BaseHandler):
     @tornado.gen.coroutine
     def post(self, *args):
         client = httpclient.HTTPClient()
-        request = httpclient.HTTPRequest(url='mi url de P3',
+        request = httpclient.HTTPRequest(url='http://localhost:5000/pwds',
                                          method ='POST',
                                          body=self.json_args)
         response = client.fetch(request)
-        k = str(uuid.uuid1().int)
-        self.json_args['key'] = k
-        _id = yield self.application.db.insert(bucket, self.json_args)
-        print('Voy a enviar!')
-        self.application.clientMQTT.publish_message(self.json_args['pass'])
-        # if self.json_args is not None:
-        #   ret, perm, email, _type = yield self.authenticate('administrador')
-        #   if perm:
-        #     edgarin= aerolinea.Aerolinea.from_json(self.json_args)
-        #     response= yield tm.registrar_aerolinea(edgarin)
-        #     self.set_status(201)
-        #     response = response.json()
-        #   else:
-        #     response = tornado.escape.json_encode(ret)
-        #     self.set_status(403)
-        # else:
-        #   self.set_status(400)
-        #   response = "Error: Content-Type must be application/json"
-        # response = "Unknown"
+
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
         self.write(_id)
 
