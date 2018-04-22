@@ -67,7 +67,7 @@ def main():
 
     application.db = RiakDB(args.riak_url)
     LOGGER.info('Data base Riak connected')
-    # application.clientMQTT = clientMQTT(args.mqtt_name, args.mqtt_url)
+    application.clientMQTT = clientMQTT(args.mqtt_name, args.mqtt_url)
     LOGGER.info('Client MQTT connected')
     application.listen(args.port)
     try:
