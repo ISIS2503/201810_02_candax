@@ -271,10 +271,10 @@ void loop() {
       int temp_index = comandoActual[1].toInt();
       deletePassword(temp_index);
     }
-    //Serial.println(compareKey("5678"));
-    //Serial.println(compareKey("1234"));
-    //Serial.println(compareKey("0000"));
-    //Serial.println(compareKey("1111"));
+    Serial.println(compareKey("5678"));
+    Serial.println(compareKey("1234"));
+    Serial.println(compareKey("0000"));
+    Serial.println(compareKey("1111"));
   }
 
   delay(100);

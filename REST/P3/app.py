@@ -109,12 +109,14 @@ class Passwd(Resource):
         global PASSWORDS_ACTIVOS, PASSWORDS_INACTIVOS
         args = parser.parse_args()
         # task = {'task': args['task']}
+        print("args:" + str(args))
         pwd = { "owner" : args["owner"],
                 "pos" : args["pos"],
                 "pass" : args["pass"],
                 "hi" : args["hi"],
                 "hf" : args["hf"],
         }
+        # print(owner)
         if(args["hi"]< str(datetime.now())):
             print("aaaaaaa" + args["hi"] +  str(datetime.now()))
             print("bbbbbbbb" + str(args["hi"]< str(datetime.now())))

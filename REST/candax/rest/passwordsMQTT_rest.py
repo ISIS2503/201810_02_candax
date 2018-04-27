@@ -24,8 +24,10 @@ class MainHandler(rest.BaseHandler):
     def post(self, *args):
         k = str(uuid.uuid1().int)
         self.json_args['key'] = k
+        print(self.json_args)
         _history = yield self.application.db.insert(bucket, self.json_args)
         owner_s = yield self.application.db.get(bucket_o, self.json_args['owner'])
+        print(owner_s)
         owner_s['passwords'].update({self.json_args['pos']:self.json_args['pass']})
         objs = yield self.application.db.update(bucket_o, owner_s)
         message = 'CHANGE_PASS;' + self.json_args['pos'] + ';' + self.json_args['pass']

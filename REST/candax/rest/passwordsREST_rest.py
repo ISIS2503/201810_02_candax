@@ -4,6 +4,7 @@ import logging
 import tornado.web
 import tornado.escape
 import tornado.httpclient as httpclient
+from requests import post as posty
 import candax.rest as rest
 from candax.auth import jwtauth
 
@@ -30,13 +31,22 @@ class MainHandler(rest.BaseHandler):
         self.write(objs)
 
     @tornado.gen.coroutine
-    def post(self, *args):
-        client = httpclient.HTTPClient()
+    def post(self, *args, **kwargs):
+        print(self.json_args)
+        client = httpclient.AsyncHTTPClient()
+        h = {'Content-Type': 'application/json; charset=UTF-8'}
         request = httpclient.HTTPRequest(url='http://localhost:5000/pwds',
                                          method='POST',
-                                         body=self.json_args)
+                                         body=json.dumps(self.json_args),
+                                         headers=h)
+        # try:
+        print(self.json_args)
         response = client.fetch(request)
-
+        # except Exception as ex:
+        #     raise ex
+        # print("posteando....")
+        # posty('http://172.24.42.47:5000/pwds', json=self.json_args)
+        # print("posteado.")
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
         self.write(self.json_args)
 

@@ -17,4 +17,5 @@ class clientMQTT:
 
     def publish_message(self, message):
         print('voy a publicar el mensaje' + str(message))
+        print(self.topic)
         self.client.publish(self.topic, message)
