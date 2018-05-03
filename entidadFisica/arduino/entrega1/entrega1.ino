@@ -85,7 +85,10 @@ void loop()
   char customKey;
 
   //healthcheck cada 30s
-  if (millis() - time > 30000)
+  //para probar
+  if (millis() - timeH > 10000)
+  //para entrega
+  // if (millis() - timeH > 30000)
   {
     Serial.println("OK");
     timeH = millis();
