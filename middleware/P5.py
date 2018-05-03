@@ -1,5 +1,5 @@
 import paho.mqtt.client as mqtt
-import time
+import time, requests, json
 
 
 IP = "172.24.41.153"
@@ -20,16 +20,26 @@ print("Conectado.")
 client.subscribe("hub2.healthcheck")
 
 def enviar_correo(message):
-    print("To: usuario1@candax.com")
-    print("message topic: " + message.topic)
-    print("message received: " + str(message.payload.decode("utf-8")))
-    print(" ")
+    #print("To: usuario1@candax.com")
+    #print("message topic: " + message.topic)
+    #print("message received: " + str(message.payload.decode("utf-8")))
+    #print(" ")
+
+    correo = {
+        'From': 'none',
+        'To': 'jm.contreras10@uniandes.edu.co',
+        'Data': '¡Cerradura fuera de linea!',
+        'Subject': '¡Alarma!'
+    }
+    url = 'http://172.24.42.125:8089/mail'
+    response = requests.post(url, json=correo)
+    print(response)
+    
 
 def on_message(client, data, message):
     global mess
     mess = str(message.payload.decode("utf-8"))
     if (mess != 'OK'):
-        # print('ENVIAR CORREO')
         enviar_correo(message)
 
 client.on_message = on_message
@@ -52,4 +62,6 @@ while True:
 
     if (num >= numberTolerance):
         print('MAS DE ' + str(numberTolerance) + ' ERRORES')
+        a = {'topic':'Alarma'}
+        enviar_correo(a)
         num = 0
