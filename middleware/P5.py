@@ -19,11 +19,18 @@ print("Conectado.")
 #Subscribes the client to lock topic flow
 client.subscribe("hub2.healthcheck")
 
+def enviar_correo(message):
+    print("To: usuario1@candax.com")
+    print("message topic: " + message.topic)
+    print("message received: " + str(message.payload.decode("utf-8")))
+    print(" ")
+
 def on_message(client, data, message):
     global mess
     mess = str(message.payload.decode("utf-8"))
     if (mess != 'OK'):
-        print('ENVIAR CORREO')
+        # print('ENVIAR CORREO')
+        enviar_correo(message)
 
 client.on_message = on_message
 

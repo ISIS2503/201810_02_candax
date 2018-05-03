@@ -17,11 +17,13 @@ print("Conectando a " + IP + " en el puerto "+ str(puerto) + "...")
 client.connect(IP, port = puerto)
 print("Conectado.")
 #Subscribes the client to lock topic flow
-client.subscribe("lock2.healthcheck")
+client.subscribe("alarms.res1.house1")
 
 def on_message(client, data, message):
     global mess
-    mess = str(message.payload.decode("utf-8"))
+    m = str(message.payload.decode("utf-8"))
+    if(m == 'OK'):
+        mess = str(message.payload.decode("utf-8"))
 
 client.on_message = on_message
 
@@ -38,7 +40,7 @@ while True:
         mess = ''
 
     currentTime= time.time()*1000
-    if (currentTime-ms)> 300000:
+    if (currentTime-ms)> 30000:
         num = 0
         ms = currentTime
 
