@@ -23,6 +23,9 @@ unsigned long t2;
 //vars healthcheck
 unsigned long timeH;
 
+//silenciar alarma
+bool silenciado;
+
 boolean first;
 boolean first1;
 boolean printOpen;
@@ -66,6 +69,9 @@ void setup()
   // Healthcheck
   timeH = millis();
 
+  //silenciad
+  silenciado = false; 
+
   pinMode(redLed, OUTPUT);
   pinMode(redLed2, OUTPUT);
   pinMode(buzzer, OUTPUT);
@@ -86,9 +92,9 @@ void loop()
 
   //healthcheck cada 30s
   //para probar
-  if (millis() - timeH > 10000)
+  // if (millis() - timeH > 10000)
   //para entrega
-  // if (millis() - timeH > 30000)
+  if (millis() - timeH > 30000)
   {
     Serial.println("OK");
     timeH = millis();
@@ -108,7 +114,7 @@ void loop()
       if (millis() - t1 > 5000)
       {
         setColor(255, 0, 0);
-        digitalWrite(buzzer, HIGH);
+        escribirBuzzer();
         delay(1000);
         if (printOpen)
         {
@@ -140,7 +146,7 @@ void loop()
   {
     Serial.println("Number of attempts exceeded");
     setColor(255, 0, 0);
-    digitalWrite(buzzer, HIGH);
+    escribirBuzzer();
     delay(30000);
     setColor(0, 0, 255);
     digitalWrite(buzzer, LOW);
@@ -210,7 +216,7 @@ void loop()
         if (millis() - t1 > 5000)
         {
           setColor(255, 0, 0);
-          digitalWrite(buzzer, HIGH);
+          escribirBuzzer();
           delay(1000);
           //door opened for too long
           if (printOpen1)
@@ -228,7 +234,7 @@ void loop()
       Serial.print("Number of attempts: " + String(attempts));
       Serial.println("");
       setColor(255, 0, 0);
-      digitalWrite(buzzer, HIGH);
+      escribirBuzzer();
       delay(1000);
       setColor(0, 0, 255);
       digitalWrite(buzzer, LOW);
@@ -242,7 +248,7 @@ void loop()
   if (digitalRead(pirSens))
   {                             // check if the input is HIGH
     digitalWrite(redLed, HIGH); // turn LED ON
-    digitalWrite(buzzer, HIGH);
+    escribirBuzzer();
     delay(1000);
     if (pirState == LOW)
     {
@@ -270,7 +276,7 @@ void loop()
   if (voltage < 1.2)
   {
     digitalWrite(redLed2, HIGH);
-    digitalWrite(buzzer, HIGH);
+    escribirBuzzer();
     delay(2000);
     Serial.println("Low Battery");
   }
@@ -300,6 +306,16 @@ void loop()
       int temp_key = comandoActual[2].toInt();
       addPassword(temp_key, temp_index);
     }
+    else if (comandoActual[0] == "SILENCE")
+    {
+      Serial.println("Silencing...");
+      silenciado = true;
+    }
+    else if (comandoActual[0] == "UNSILENCE")
+    {
+      Serial.println("Unsilencing...");
+      silenciado = false;
+    }
     else if (comandoActual[0] == "DEL_PASS")
     {
       Serial.println("Delete password");
@@ -311,6 +327,8 @@ void loop()
     Serial.println(compareKey("0000"));
     Serial.println(compareKey("1111"));
   }
+
+  
 
   delay(100);
 }
@@ -410,5 +428,12 @@ void deleteAllPasswords()
   for (int i = 0; i < 20; i++)
   {
     EEPROM.write(i, 0);
+  }
+}
+
+
+void escribirBuzzer(){
+  if(!silenciado){
+    digitalWrite(buzzer, HIGH);
   }
 }
