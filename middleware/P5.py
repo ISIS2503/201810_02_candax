@@ -26,9 +26,9 @@ def enviar_correo(message):
     #print(" ")
 
     correo = {
-        'From': 'none',
-        'To': 'jm.contreras10@uniandes.edu.co',
-        'Data': '¡Cerradura fuera de linea!',
+        'From': 'info@candax.com',
+        'To': 's.jimenez16@uniandes.edu.co',
+        'Data': '¡' + message + ' fuera de linea!',
         'Subject': '¡Alarma!'
     }
     url = 'http://172.24.42.125:8089/mail'
@@ -40,7 +40,8 @@ def on_message(client, data, message):
     global mess
     mess = str(message.payload.decode("utf-8"))
     if (mess != 'OK'):
-        enviar_correo(message)
+        m = 'Cerradura'
+        enviar_correo(m)
 
 client.on_message = on_message
 
@@ -62,6 +63,6 @@ while True:
 
     if (num >= numberTolerance):
         print('MAS DE ' + str(numberTolerance) + ' ERRORES')
-        a = {'topic':'Alarma'}
+        a = 'Hub'
         enviar_correo(a)
         num = 0
