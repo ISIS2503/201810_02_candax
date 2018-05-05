@@ -35,7 +35,7 @@ import candax.rest.auth_rest as auth_rest
 
 # Define new rest associations
 REST = [
-    (r'/alarms(/?(.+)?)', alarms_rest.MainHandler), #YALE
+    (r'/alarms(/?(.+)?)', alarms_rest.MainHandler), # YALE
     (r'/residentialUnits(/?(.+)?)', residential_units_rest.MainHandler),
     (r'/houses(/?(.+)?)', houses_rest.MainHandler),
     (r'/yale(/?(.+)?)', yale_rest.MainHandler),

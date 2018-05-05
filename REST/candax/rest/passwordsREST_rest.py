@@ -28,7 +28,10 @@ class MainHandler(rest.BaseHandler):
     def post(self, *args, **kwargs):
         client = httpclient.AsyncHTTPClient()
         h = {'Content-Type': 'application/json; charset=UTF-8'}
-        request = httpclient.HTTPRequest(url='http://localhost:5000/pwds',method='POST',body=json.dumps(self.json_args),headers=h)
+        request = httpclient.HTTPRequest(url='http://localhost:5000/pwds',
+                                         method='POST',
+                                         body=json.dumps(self.json_args),
+                                         headers=h)
         print(self.json_args)
         response = client.fetch(request)
         k = str(uuid.uuid1().int)

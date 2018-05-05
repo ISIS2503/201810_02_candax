@@ -26,7 +26,7 @@ class MainHandler(rest.BaseHandler):
             print('jkdasjdklsadja')
         else:
             data_admin = yield self.application.db.get(bucket_a, _id)
-            s = data_admin['res_unit']
+            s = data_admin['res_unit'][0]
             objs = yield self.application.db.get_all_user(bucket, s, 'Admin')
         # self.set_status(403)
         objs = json.dumps(objs)

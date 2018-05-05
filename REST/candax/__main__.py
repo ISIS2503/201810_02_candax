@@ -31,7 +31,7 @@ parser = argparse.ArgumentParser(
 # pbc://172.24.41.149:8087
 # pbc://localhost:8087
 
-parser.add_argument('--riak-url', type=str, default='pbc://172.24.41.149:8087',
+parser.add_argument('--riak-url', type=str, default='pbc://localhost:8087',
                     help='Riak url endpoint used to locate DB')
 parser.add_argument('--port', type=int, default=8000,
                     help='TCP port used to deploy the server')
@@ -67,8 +67,8 @@ def main():
 
     application.db = RiakDB(args.riak_url)
     LOGGER.info('Data base Riak connected')
-    application.clientMQTT = clientMQTT(args.mqtt_name, args.mqtt_url)
-    LOGGER.info('Client MQTT connected')
+    # application.clientMQTT = clientMQTT(args.mqtt_name, args.mqtt_url)
+    # LOGGER.info('Client MQTT connected')
     application.listen(args.port)
     try:
         ioloop.start()

@@ -22,7 +22,6 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def get(self, _, _id=None):
-        # print("MSG: {0}".format(self.application.db is None))
         if _id is None:
             objs = yield self.application.db.get_all(bucket)
         else:
@@ -34,27 +33,13 @@ class MainHandler(rest.BaseHandler):
 
     @tornado.gen.coroutine
     def post(self, *args):
-        #alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
-        k = str(uuid.uuid1().int)
-        passwords= {'1':'', '2':'','3':'','4':'','5':'','6':'','7':'','8':'','9':'','10':'','11':'','12':'','13':'', '14':''
-        ,'15':'','16':'','17':'','18':'','19':'','20':''}
-        self.json_args['key'] = k
+        # alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
+        passwords = {'1': '', '2': '', '3': '', '4': '', '5': '', '6': '',
+                     '7': '', '8': '', '9': '', '10': '', '11': '', '12': '',
+                     '13': '', '14': '', '15': '', '16': '', '17': '',
+                     '18': '', '19': '', '20': ''}
         self.json_args['passwords'] = passwords
         _id = yield self.application.db.insert(bucket, self.json_args)
-        # if self.json_args is not None:
-        #   ret, perm, email, _type = yield self.authenticate('administrador')
-        #   if perm:
-        #     edgarin= aerolinea.Aerolinea.from_json(self.json_args)
-        #     response= yield tm.registrar_aerolinea(edgarin)
-        #     self.set_status(201)
-        #     response = response.json()
-        #   else:
-        #     response = tornado.escape.json_encode(ret)
-        #     self.set_status(403)
-        # else:
-        #   self.set_status(400)
-        #   response = "Error: Content-Type must be application/json"
-        # response = "Unknown"
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
         self.write(_id)
 
