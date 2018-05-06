@@ -1,0 +1,133 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Houses",
+		"_postman_id": "91798c51-1c14-91f5-8b10-ba6a8550f590",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET  H ONE",
+			"request": {
+				"url": "http://localhost:8000/houses/H1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU2\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET  H ALL",
+			"request": {
+				"url": "http://localhost:8000/houses",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU2\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST H",
+			"request": {
+				"url": "http://localhost:8000/houses",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\":\"H3\",\"res_unit\": \"RU1\", \"numero\": \"3\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT  H",
+			"request": {
+				"url": "http://localhost:8000/houses/H3",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\":\"H3\",\"res_unit\": \"RU2\", \"numero\": \"3\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE H",
+			"request": {
+				"url": "http://localhost:8000/houses/H2",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

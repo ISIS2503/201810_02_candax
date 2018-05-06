@@ -1,0 +1,169 @@
+{
+	"variables": [],
+	"info": {
+		"name": "OTHER",
+		"_postman_id": "36eead3e-47fd-2cb8-c339-554fc45012c7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET  neighborhood",
+			"request": {
+				"url": "http://localhost:8000/history/neighborhood/San_Andresito",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU3\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET  realTime/residentialUnit/",
+			"request": {
+				"url": "http://localhost:8000/realTime/residentialUnit/RU2",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU3\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET  realTime/houses/",
+			"request": {
+				"url": "http://localhost:8000/realTime/houses/H1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU3\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET  month/houses/",
+			"request": {
+				"url": "http://localhost:8000/month/houses/05/2018/H1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU3\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET  month/residentialUnit/",
+			"request": {
+				"url": "http://localhost:8000/month/residentialUnit/5/2018/RU1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU3\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET  history/owners",
+			"request": {
+				"url": "http://localhost:8000/history/owners/O1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU3\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET  history/admin",
+			"request": {
+				"url": "http://localhost:8000/history/administrators/ADMIN1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU3\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

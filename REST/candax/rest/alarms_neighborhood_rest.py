@@ -21,7 +21,8 @@ class MainHandler(rest.BaseHandler):
     @tornado.gen.coroutine
     def get(self, _id=None):
         if _id is None:
-            print('Error, debe agregar un barrio para buscar')
+            objs= {"Error": "debe agregar un RU para buscar"}
+            self.set_status(400)
         else:
             _id = _id.replace("_", " ")
             objs = yield self.application.db.get_neighborhood(bucket, bucket_RU, _id)

@@ -1,0 +1,133 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Locks",
+		"_postman_id": "7df6cb7a-27be-d2e8-0b9c-db5e08615e76",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET  L ONE",
+			"request": {
+				"url": "http://localhost:8000/locks/L1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU2\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET  L ALL",
+			"request": {
+				"url": "http://localhost:8000/locks",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\": \"RU2\", \"name\": \"Robles\", \"direccion\":\"calle 82 #43-25\", \"Barrio\": \"San Andresito\", \"admin\": \"ADMIN1\", \"security\": \"PS1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST L",
+			"request": {
+				"url": "http://localhost:8000/locks",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\":\"L5\",\"res_unit\":\"RU1\", \"house\": \"H1\", \"hub\": \"HUB1\", \"frequency\": \"30\", \"tolerance\": \"2\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT  L",
+			"request": {
+				"url": "http://localhost:8000/locks/L5",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"key\":\"L5\",\"res_unit\":\"RU1\", \"house\": \"H3\", \"hub\": \"HUB1\", \"frequency\": \"30\", \"tolerance\": \"2\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE L",
+			"request": {
+				"url": "http://localhost:8000/locks/L5",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

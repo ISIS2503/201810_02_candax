@@ -26,7 +26,11 @@ class MainHandler(rest.BaseHandler):
             objs = yield self.application.db.get_all(bucket)
         else:
             objs = yield self.application.db.get(bucket, _id)
-        # self.set_status(403)
+            if objs is None:
+                self.set_status(400)
+                objs = {"Error": "Object does not exist"}
+            else:
+                self.set_status(201)
         objs = json.dumps(objs)
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
         self.write(objs)
@@ -34,36 +38,50 @@ class MainHandler(rest.BaseHandler):
     @tornado.gen.coroutine
     def post(self, *args):
         # alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
-        passwords = {'1': '', '2': '', '3': '', '4': '', '5': '', '6': '',
-                     '7': '', '8': '', '9': '', '10': '', '11': '', '12': '',
-                     '13': '', '14': '', '15': '', '16': '', '17': '',
-                     '18': '', '19': '', '20': ''}
-        self.json_args['passwords'] = passwords
-        _id = yield self.application.db.insert(bucket, self.json_args)
+        objs = yield self.application.db.get(bucket, self.json_args['key'])
+        if objs is not None:
+            self.set_status(400)
+            response = {"Error": "The object already exist"}
+        else:
+            self.set_status(201)
+            passwords = {'1': '', '2': '', '3': '', '4': '', '5': '', '6': '',
+                         '7': '', '8': '', '9': '', '10': '', '11': '', '12': '',
+                         '13': '', '14': '', '15': '', '16': '', '17': '',
+                         '18': '', '19': '', '20': ''}
+            self.json_args['passwords'] = passwords
+            response = yield self.application.db.insert(bucket, self.json_args)
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
-        self.write(_id)
+        self.write(response)
 
     @tornado.gen.coroutine
     def put(self, *args):
-        # print("MSG: {0}".format(self.application.db is None))
-        #bucket = 'test'
-        objs = yield self.application.db.update(bucket, self.json_args)
-        # self.set_status(403)
-        print(objs)
+        if self.json_args is not None:
+            objs = yield self.application.db.get(bucket, self.json_args['key'])
+            if objs is None:
+                self.set_status(400)
+                objs = {"Error": "The object does not exist"}
+            else:
+                objs = yield self.application.db.update(bucket, self.json_args)
+                self.set_status(201)
+        else:
+            self.set_status(400)
+            objs = {"Error": "No content type"}
         objs = json.dumps(objs)
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
         self.write(objs)
 
     @tornado.gen.coroutine
     def delete(self, _, _id=None):
-        #bucket = 'test'
-        print(_id)
-        if _id is None:
-            #objs = yield self.application.db.get_all(bucket)
-            print('no hay naditaaaaa')
-        else:
+        if _id is not None:
             objs = yield self.application.db.delete(bucket, _id)
-        # self.set_status(403)
+            if objs is None:
+                self.set_status(400)
+                objs = {"Error": "The object does not exist"}
+            else:
+                self.set_status(201)
+        else:
+            self.set_status(400)
+            objs = {"Error": "No id"}
         objs = json.dumps(objs)
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
         self.write(objs)

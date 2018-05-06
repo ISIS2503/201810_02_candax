@@ -19,7 +19,7 @@ class MainHandler(rest.BaseHandler):
     @tornado.gen.coroutine
     def get(self, _id=None):
         if _id is None:
-            print('Error, debe agregar un RU para buscar')
+            objs= {"Error": "debe agregar un RU para buscar"}
         else:
             _id = _id.replace("_", " ")
             objs = yield self.application.db.get_month(bucket, _id, 'res_unit')
