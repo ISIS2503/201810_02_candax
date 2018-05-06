@@ -14,6 +14,7 @@ ms = time.time()*1000
 client = mqtt.Client("ClienteP4")
 #Connects to the mosquitto server on port 8083
 print("Conectando a " + IP + " en el puerto "+ str(puerto) + "...")
+client.username_pw_set("microcontrolador", "Isis2503") #Configuración para la seguridad del mosquitto
 client.connect(IP, port = puerto)
 print("Conectado.")
 #Subscribes the client to lock topic flow
@@ -32,7 +33,7 @@ while True:
     time.sleep(frecuency)
     client.loop_stop()
     client.publish("hub2.healthcheck", payload='OK', qos=0, retain=False)
-    print('PUBLICOOOO')
+    #print('PUBLICOOOO')
     if(mess==''):
         num = num + 1
         print('Er' + str(num))

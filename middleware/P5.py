@@ -14,6 +14,7 @@ ms = time.time()*1000
 client = mqtt.Client("ClienteYALE")
 #Connects to the mosquitto server on port 8083
 print("Conectando a " + IP + " en el puerto "+ str(puerto) + "...")
+client.username_pw_set("microcontrolador", "Isis2503") #Configuración para la seguridad del mosquitto
 client.connect(IP, port = puerto)
 print("Conectado.")
 #Subscribes the client to lock topic flow

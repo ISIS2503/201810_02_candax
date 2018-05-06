@@ -7,9 +7,9 @@ puerto = 8083
 
 #Creates the client
 client = mqtt.Client("C2")
-
 #Connects to the mosquitto server on port 8083
 print("Conectando a " + IP + " en el puerto "+ str(puerto) + "...")
+client.username_pw_set("microcontrolador", "Isis2503") #Configuración para la seguridad del mosquitto
 client.connect(IP, port = puerto)
 print("Conectado.")
 #Subscribes the client to all the topics defined on node-red flow
