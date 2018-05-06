@@ -31,6 +31,8 @@ import candax.rest.passwordsREST_rest as passwordsREST_rest
 import candax.rest.yale_rest as yale_rest
 import candax.rest.private_security_rest as private_security_rest
 import candax.rest.auth_rest as auth_rest
+import candax.rest.alarms_neighborhood_rest as alarms_neighborhood_rest
+
 # import candax.rest as rest
 
 # Define new rest associations
@@ -48,7 +50,8 @@ REST = [
     (r'/history/administrators/?(.+)?', alarms_admin_rest.MainHandler), #Admin
     (r'/passwords(/?(.+)?)', passwordsREST_rest.MainHandler),  #YALE
     (r'/publishPasswords(/?(.+)?)', passwordsMQTT_rest.MainHandler),  #YALE
-    (r'/auth(/?(.+)?)', auth_rest.MainHandler)
+    (r'/auth(/?(.+)?)', auth_rest.MainHandler),
+    (r'/history/neighborhood/?(.+)?', alarms_neighborhood_rest.MainHandler)
 ]
 
 # Define new web rendering route associations

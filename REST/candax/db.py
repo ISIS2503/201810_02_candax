@@ -79,3 +79,23 @@ class RiakDB:
             elif type == 'Owner' and act['res_unit'] == parts[0] and act['house'] == parts[1]:
                 ret.append(act)
         return ret
+
+    @threadexecute
+    def get_neighborhood(self, bucket, bucket_RU, request_id):
+        ret = []
+        alarmsB = self.client.bucket(bucket)
+        resUnits = self.client.bucket(bucket_RU)
+
+        for key in alarmsB.get_keys():
+            act = alarmsB.get(key).data
+            print(act)
+            for key in resUnits.get_keys():
+                act_RU = resUnits.get(key).data
+                # print(act_RU)
+                # print(act['res_unit'])
+                # print(act_RU['key'])
+                # print(act_RU['Barrio'])
+                # print(request_id)
+                if act['res_unit']== act_RU['key'] and act_RU['Barrio'] == request_id:
+                    ret.append(act)
+        return ret
