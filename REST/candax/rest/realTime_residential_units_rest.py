@@ -11,8 +11,6 @@ import candax.rest as rest
 
 LOGGER = logging.getLogger(__name__)
 bucket = 'alarms'
-bucket_RU = 'residential_units'
-
 
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
@@ -21,10 +19,10 @@ class MainHandler(rest.BaseHandler):
     @tornado.gen.coroutine
     def get(self, _id=None):
         if _id is None:
-            print('Error, debe agregar un barrio para buscar')
+            print('Error, debe agregar un RU para buscar')
         else:
             _id = _id.replace("_", " ")
-            objs = yield self.application.db.get_neighborhood(bucket, bucket_RU, _id)
+            objs = yield self.application.db.get_hour(bucket, _id, 'res_unit')
         objs = json.dumps(objs)
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
         self.write(objs)

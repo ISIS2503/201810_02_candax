@@ -6,6 +6,7 @@ import tornado.gen
 import logging
 from urllib.parse import urlparse
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta
 
 MAX_WORKERS = 10
 LOGGER = logging.getLogger(__name__)
@@ -88,14 +89,21 @@ class RiakDB:
 
         for key in alarmsB.get_keys():
             act = alarmsB.get(key).data
-            print(act)
             for key in resUnits.get_keys():
                 act_RU = resUnits.get(key).data
-                # print(act_RU)
-                # print(act['res_unit'])
-                # print(act_RU['key'])
-                # print(act_RU['Barrio'])
-                # print(request_id)
                 if act['res_unit']== act_RU['key'] and act_RU['Barrio'] == request_id:
                     ret.append(act)
+        return ret
+
+    @threadexecute
+    def get_hour(self, bucket, request_id, type):
+        ret = []
+        alarmsB = self.client.bucket(bucket)
+        for key in alarmsB.get_keys():
+            act = alarmsB.get(key).data
+            date = act['date']
+            datetime_object = datetime.strptime(date, '%H:%M %d-%m-%Y')
+            date_now = datetime.now()
+            if act[type]== request_id and ((date_now - timedelta(hours = 1))<datetime_object):
+                ret.append(act)
         return ret

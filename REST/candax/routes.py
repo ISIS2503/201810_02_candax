@@ -32,6 +32,7 @@ import candax.rest.yale_rest as yale_rest
 import candax.rest.private_security_rest as private_security_rest
 import candax.rest.auth_rest as auth_rest
 import candax.rest.alarms_neighborhood_rest as alarms_neighborhood_rest
+import candax.rest.realTime_residential_units_rest as realTime_residential_units_rest
 
 # import candax.rest as rest
 
@@ -51,7 +52,8 @@ REST = [
     (r'/passwords(/?(.+)?)', passwordsREST_rest.MainHandler),  #YALE
     (r'/publishPasswords(/?(.+)?)', passwordsMQTT_rest.MainHandler),  #YALE
     (r'/auth(/?(.+)?)', auth_rest.MainHandler),
-    (r'/history/neighborhood/?(.+)?', alarms_neighborhood_rest.MainHandler)
+    (r'/history/neighborhood/?(.+)?', alarms_neighborhood_rest.MainHandler),
+    (r'/realTime/residentialUnit/?(.+)?', realTime_residential_units_rest.MainHandler)
 ]
 
 # Define new web rendering route associations
