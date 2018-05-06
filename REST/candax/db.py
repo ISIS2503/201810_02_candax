@@ -107,3 +107,24 @@ class RiakDB:
             if act[type]== request_id and ((date_now - timedelta(hours = 1))<datetime_object):
                 ret.append(act)
         return ret
+
+    @threadexecute
+    def get_month(self, bucket, request_id, type):
+        ret = []
+        alarmsB = self.client.bucket(bucket)
+        month,year,search_by = request_id.split('/')
+        print(year)
+        print(month)
+        print(search_by)
+        search_date = datetime.strptime(month + '-' + year, '%m-%Y')
+
+        for key in alarmsB.get_keys():
+            act = alarmsB.get(key).data
+            date = act['date']
+            alarm_date = datetime.strptime(date, '%H:%M %d-%m-%Y')
+            print(alarm_date.year==search_date.year)
+            print(alarm_date.month==month)
+            if act[type]==search_by and alarm_date.year==search_date.year and alarm_date.month==search_date.month:
+                print('aaaa')
+                ret.append(act)
+        return ret
