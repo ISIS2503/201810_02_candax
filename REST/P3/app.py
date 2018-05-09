@@ -9,19 +9,17 @@ import time
 import threading
 import json
 
+
 def ordenarPorHi(arr):
-    arr.sort(key = lambda x : x['hi'])
+    arr.sort(key=lambda x: x['hi'])
 
 
 def ordenarPorHf(arr):
-    arr.sort(key = lambda x : x['hf'])
-
+    arr.sort(key=lambda x: x['hf'])
 
 
 app = Flask(__name__)
 api = Api(app)
-
-
 
 # resource_fields = {
 #     'owner':   fields.String,
@@ -37,19 +35,22 @@ api = Api(app)
 def activate_job():
     def run_job():
         while True:
-            # print("activas " + str(len(PASSWORDS_ACTIVOS))+ " pasivas " + str(len(PASSWORDS_INACTIVOS)))
+            # print("activas " + str(len(PASSWORDS_ACTIVOS))+ " pasivas " +
+            # str(len(PASSWORDS_INACTIVOS)))
             ya = str(datetime.now())
-            print(ya + " activos " + str(len(PASSWORDS_ACTIVOS)) + " inactivos " + str(len(PASSWORDS_INACTIVOS)))
-            if(len(PASSWORDS_ACTIVOS)>=1):
-                while(len(PASSWORDS_ACTIVOS)>=1 and PASSWORDS_ACTIVOS[0]["hf"]<ya):
+            print(ya + " activos " + str(len(PASSWORDS_ACTIVOS)) +
+                                         " inactivos " +
+                                         str(len(PASSWORDS_INACTIVOS)))
+            if(len(PASSWORDS_ACTIVOS) >= 1):
+                while(len(PASSWORDS_ACTIVOS) >= 1 and PASSWORDS_ACTIVOS[0]["hf"] < ya):
                     print("entra a sacar activo")
                     pwd = PASSWORDS_ACTIVOS.pop(0)
                     pwd["pass"] = "0000"
                     print(pwd)
                     print(json.dumps(pwd))
                     post('http://localhost:8000/publishPasswords', json=(pwd))
-            if(len(PASSWORDS_INACTIVOS)>=1):
-                while(len(PASSWORDS_INACTIVOS)>=1 and PASSWORDS_INACTIVOS[0]["hi"]<ya):
+            if(len(PASSWORDS_INACTIVOS) >= 1):
+                while(len(PASSWORDS_INACTIVOS) >= 1 and PASSWORDS_INACTIVOS[0]["hi"] < ya):
                     print("entra a sacar inactivo")
                     pwd = PASSWORDS_INACTIVOS.pop(0)
                     PASSWORDS_ACTIVOS.append(pwd)
@@ -61,6 +62,7 @@ def activate_job():
 
     thread = threading.Thread(target=run_job)
     thread.start()
+
 
 def start_runner():
     def start_loop():
@@ -110,14 +112,13 @@ class Passwd(Resource):
         args = parser.parse_args()
         # task = {'task': args['task']}
         print("args:" + str(args))
-        pwd = { "owner" : args["owner"],
-                "pos" : args["pos"],
-                "pass" : args["pass"],
-                "hi" : args["hi"],
-                "hf" : args["hf"],
-        }
+        pwd = {"owner": args["owner"],
+               "pos": args["pos"],
+               "pass": args["pass"],
+               "hi": args["hi"],
+               "hf": args["hf"], }
         # print(owner)
-        if(args["hi"]< str(datetime.now())):
+        if(args["hi"] < str(datetime.now())):
             print("aaaaaaa" + args["hi"] +  str(datetime.now()))
             print("bbbbbbbb" + str(args["hi"]< str(datetime.now())))
             print("entra activos post")
@@ -138,7 +139,7 @@ class Passwd(Resource):
         return pwd, 200
 
     def get(self):
-        return "up and running",200
+        return "up and running", 200
 
 
 # TodoList

@@ -10,21 +10,23 @@ num = 0
 numberTolerance = 5
 frecuency = 5
 ms = time.time()*1000
-#Creates the client
+# Creates the client
 client = mqtt.Client("ClienteYALE")
-#Connects to the mosquitto server on port 8083
-print("Conectando a " + IP + " en el puerto "+ str(puerto) + "...")
-client.username_pw_set("microcontrolador", "Isis2503") #Configuración para la seguridad del mosquitto
-client.connect(IP, port = puerto)
+# Connects to the mosquitto server on port 8083
+print("Conectando a " + IP + " en el puerto " + str(puerto) + "...")
+# Configuración para la seguridad del mosquitto
+client.username_pw_set("microcontrolador", "Isis2503")
+client.connect(IP, port=puerto)
 print("Conectado.")
-#Subscribes the client to lock topic flow
+# Subscribes the client to lock topic flow
 client.subscribe("hub2.healthcheck")
 
+
 def enviar_correo(message):
-    #print("To: usuario1@candax.com")
-    #print("message topic: " + message.topic)
-    #print("message received: " + str(message.payload.decode("utf-8")))
-    #print(" ")
+    # print("To: usuario1@candax.com")
+    # print("message topic: " + message.topic)
+    # print("message received: " + str(message.payload.decode("utf-8")))
+    # print(" ")
 
     correo = {
         'From': 'info@candax.com',
@@ -35,7 +37,7 @@ def enviar_correo(message):
     url = 'http://172.24.42.125:8089/mail'
     response = requests.post(url, json=correo)
     print(response)
-    
+
 
 def on_message(client, data, message):
     global mess
@@ -44,21 +46,22 @@ def on_message(client, data, message):
         m = 'Cerradura'
         enviar_correo(m)
 
+
 client.on_message = on_message
 
 while True:
     client.loop_start()
     time.sleep(frecuency)
     client.loop_stop()
-    if(mess==''):
+    if(mess == ''):
         num = num + 1
         print('Er' + str(num))
     else:
         mess = ''
         print('NO ERROR')
 
-    currentTime= time.time()*1000
-    if (currentTime-ms)> 300000:
+    currentTime = time.time()*1000
+    if (currentTime-ms) > 300000:
         num = 0
         ms = currentTime
 

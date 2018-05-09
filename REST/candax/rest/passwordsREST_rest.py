@@ -12,6 +12,7 @@ import uuid
 LOGGER = logging.getLogger(__name__)
 bucket = 'passwords'
 
+
 @jwtauth
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
