@@ -12,17 +12,31 @@ import json
 app = Flask(__name__)
 
 
+silenced = False
+
+
 @app.route('/mail', methods=['POST'])
 def restSendEmail():
 
     if request.json:
         mydata = request.json  # will be
-        sendMail(mydata)
+        if(not silenced):
+            sendMail(mydata)
+        else:
+            print("Esta silenciado, no enviará correo")
+            return jsonify({"silenced":str(silenced)})
 
     else:
         print("no json received")
 
     return jsonify(request.json)
+
+@app.route('/silence', methods=['POST'])
+def cambiarSilenciado():
+    global silenced
+    silenced = not silenced
+    return jsonify({"silenced":str(silenced)})
+
 
 
 @app.route('/mail', methods=['GET'])
