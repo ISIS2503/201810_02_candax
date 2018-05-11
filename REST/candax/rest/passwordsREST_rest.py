@@ -29,7 +29,7 @@ class MainHandler(rest.BaseHandler):
     def post(self, *args, **kwargs):
         client = httpclient.AsyncHTTPClient()
         h = {'Content-Type': 'application/json; charset=UTF-8'}
-        request = httpclient.HTTPRequest(url='http://localhost:5000/pwds',
+        request = httpclient.HTTPRequest(url='http://172.24.41.152:8888/pwds',
                                          method='POST',
                                          body=json.dumps(self.json_args),
                                          headers=h)
@@ -45,7 +45,7 @@ class MainHandler(rest.BaseHandler):
     def put(self, *args, **kwargs):
         client = httpclient.AsyncHTTPClient()
         h = {'Content-Type': 'application/json; charset=UTF-8'}
-        request = httpclient.HTTPRequest(url='http://localhost:5000/pwds',method='POST',body=json.dumps(self.json_args),headers=h)
+        request = httpclient.HTTPRequest(url='http://172.24.41.152:8888/pwds',method='POST',body=json.dumps(self.json_args),headers=h)
         print(self.json_args)
         response = client.fetch(request)
         k = str(uuid.uuid1().int)
@@ -59,7 +59,7 @@ class MainHandler(rest.BaseHandler):
         client = httpclient.AsyncHTTPClient()
         self.json_args['pass'] = '0000'
         h = {'Content-Type': 'application/json; charset=UTF-8'}
-        request = httpclient.HTTPRequest(url='http://localhost:5000/pwds',method='POST',body=json.dumps(self.json_args),headers=h)
+        request = httpclient.HTTPRequest(url='http://localhost:8888/pwds',method='POST',body=json.dumps(self.json_args),headers=h)
         print(self.json_args)
         response = client.fetch(request)
         k = str(uuid.uuid1().int)

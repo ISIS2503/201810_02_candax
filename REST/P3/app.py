@@ -188,4 +188,4 @@ if __name__ == '__main__':
     # p = Process(target=record_loop,args=(recording_on,))
     # p.start()
     start_runner()
-    app.run(debug=True)
+    app.run(debug=True, port=8888)
