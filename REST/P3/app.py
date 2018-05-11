@@ -48,7 +48,7 @@ def activate_job():
                     pwd["pass"] = "0000"
                     print(pwd)
                     print(json.dumps(pwd))
-                    post('http://172.24.41.149:8000/publishPasswords', json=(pwd))
+                    post('http://172.24.42.68:8000/publishPasswords', json=(pwd))
             if(len(PASSWORDS_INACTIVOS) >= 1):
                 while(len(PASSWORDS_INACTIVOS) >= 1 and PASSWORDS_INACTIVOS[0]["hi"] < ya):
                     print("entra a sacar inactivo")
@@ -56,7 +56,7 @@ def activate_job():
                     PASSWORDS_ACTIVOS.append(pwd)
                     print(pwd)
                     print(json.dumps(pwd))
-                    post('http://172.24.41.149:8000/publishPasswords', json=(pwd))
+                    post('http://172.24.42.68:8000/publishPasswords', json=(pwd))
 
             time.sleep(3)
 
