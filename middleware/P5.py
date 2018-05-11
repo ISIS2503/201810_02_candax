@@ -34,7 +34,7 @@ def enviar_correo(message):
         'Data': '¡' + message + ' fuera de linea!',
         'Subject': '¡Alarma!'
     }
-    url = 'http://172.24.42.125:8089/mail'
+    url = 'http://172.24.42.152:8089/mail'
     response = requests.post(url, json=correo)
     print(response)
 
