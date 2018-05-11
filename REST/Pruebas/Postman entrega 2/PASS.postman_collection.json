@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "9d18864a-80f6-4dca-84ae-06492dd4fd94",
+		"name": "PASS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST PASSWORD",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"owner\": \"O3\", \n  \"pass\": \"1200\", \n  \"pos\":\"2\",\n  \"hi\": \"2018-05-11 11:55:30.896283\",\n  \"hf\": \"2018-05-11 11:55:40.162303\"\n}"
+				},
+				"url": {
+					"raw": "http://172.24.42.68:8000/passwords",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"42",
+						"68"
+					],
+					"port": "8000",
+					"path": [
+						"passwords"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT PASSWORD",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"owner\": \"O3\", \n  \"pass\": \"1200\", \n  \"pos\":\"2\",\n  \"hi\": \"2018-05-11 11:59:58.896283\",\n  \"hf\": \"2018-05-11 11:59:59.162303\"\n}"
+				},
+				"url": {
+					"raw": "http://172.24.42.68:8000/passwords",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"42",
+						"68"
+					],
+					"port": "8000",
+					"path": [
+						"passwords"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE PASS",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0ZWZmLm90YWt1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2lzaXMyNTAzLXNqaW1lbmV6MTYuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTAxMzgwMTIzOTQ5MTIwMjMwODA5IiwiYXVkIjoiVWlYY3NlSGF1SU5kUWVlTDFFbWVuV2NkZWFMWEtxWnIiLCJpYXQiOjE1MjQyNDMxMzgsImV4cCI6MTUyNDI3OTEzOH0.S-f_9bM_MigZ-8CoodOBDGluixNFBfYlfGawoVrtGJ4"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"owner\": \"O3\", \n  \"pos\":\"2\",\n  \"hi\": \"2018-05-11 12:09:40.896283\",\n  \"hf\": \"2018-05-11 11:59:58.896283\"\n}"
+				},
+				"url": {
+					"raw": "http://172.24.42.68:8000/passwords",
+					"protocol": "http",
+					"host": [
+						"172",
+						"24",
+						"42",
+						"68"
+					],
+					"port": "8000",
+					"path": [
+						"passwords"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
