@@ -1,26 +1,26 @@
-#include <PubSubClient.h>
+#include <PubSubClient_1.h>
 #include <ESP8266WiFi.h>
 
 //DEFINES
 #define TOPIC_SUBSCRIBE        "yale.uniandes.ml337.key"
-#define TOPIC_PUBLISH          "alarms.res1.house1"//"yale.uniandes.ml337.alarm"
-#define SIZE_BUFFER_DATA       50
+#define TOPIC_PUBLISH          "alarms.res1.house1"
+#define SIZE_BUFFER_DATA       150
 
 //VARIABLES
-const char* idDevice = "ISIS2503";
-boolean     stringComplete = false;
-boolean     init_flag = false;
-String      inputString = "";
-char        bufferData [SIZE_BUFFER_DATA];
+String   idDevice = "ISIS2503";
+boolean  stringComplete = false;
+String   inputString = "";
+char     bufferData [SIZE_BUFFER_DATA];
 
 // CLIENTE WIFI & MQTT
-WiFiClientSecure    clientWIFI;
-PubSubClient  clientMQTT(clientWIFI);
+WiFiClient       clientWIFI;
+PubSubClient     clientMQTT(clientWIFI);
 
 // CONFIG WIFI
 const char* ssid = "isis2503";
-const char* password = "Yale2018";
+const char* password = "Yale2018.";
 
+// CONFIG MQTT
 // CONFIG MQTT
 unsigned char m2mqtt_ca_bin_crt[] = {
   0x30, 0x82, 0x03, 0xfb, 0x30, 0x82, 0x02, 0xe3, 0xa0, 0x03, 0x02, 0x01,
@@ -113,10 +113,21 @@ unsigned char m2mqtt_ca_bin_crt[] = {
 
 unsigned int m2mqtt_ca_bin_crt_len = 1023;
 
-IPAddress serverMQTT (192,168,0,10);
+IPAddress serverMQTT (172,24,41,153);
 const uint16_t portMQTT = 8083;
 const char* usernameMQTT = "microcontrolador";
 const char* passwordMQTT = "Isis2503";
+
+// FUNCTIONS
+String macToStr(const uint8_t* mac) {
+  String result;
+  for (int i = 0; i < 6; ++i) {
+    result += String(mac[i], 16);
+    if (i < 5)
+      result += ':';
+  }
+  return result;
+}
 
 void connectWIFI() {
   // Conectar a la red WiFi
@@ -124,6 +135,7 @@ void connectWIFI() {
   Serial.print("Connecting to ");
   Serial.println(ssid);
 
+  WiFi.mode(WIFI_STA);
   if(WiFi.status() != WL_CONNECTED) {
     WiFi.begin(ssid, password);
   }
@@ -132,8 +144,17 @@ void connectWIFI() {
     delay(500);
     Serial.print(".");
   }
-  Serial.println("");
   Serial.println("WiFi connected");
+
+  // Obtain MAC Address
+  uint8_t mac[6];
+  WiFi.macAddress(mac);
+  idDevice = macToStr(mac);
+  Serial.print("MAC Address: ");
+  Serial.println(idDevice);
+
+  // Obtain IP Address
+  Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
 }
 
@@ -148,6 +169,25 @@ void reconnectWIFI() {
   }
 }
 
+boolean connectMQTT() {
+  boolean connectMQTT = false;
+  if (!clientMQTT.connected()) {
+    if (clientMQTT.connect(idDevice.c_str(), usernameMQTT, passwordMQTT)) {
+      connectMQTT = true;
+    }
+  }
+  else {
+    connectMQTT = true;
+  }
+
+  if(connectMQTT) {
+    if(clientMQTT.subscribe(TOPIC_SUBSCRIBE)) {
+      // Serial.println("Subscribe OK");
+    }
+  }
+  return connectMQTT;
+}
+
 void callback(char* topic, byte* payload, unsigned int length) {
   Serial.write(payload, length);
   Serial.println();
@@ -155,61 +195,46 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 void setup() {
   Serial.begin(9600);
-  inputString.reserve(100);
-  clientWIFI.setCACert(m2mqtt_ca_bin_crt, m2mqtt_ca_bin_crt_len);
+  inputString.reserve(150);
+  // clientWIFI.setCACert(m2mqtt_ca_bin_crt, m2mqtt_ca_bin_crt_len);
+
   clientMQTT.setServer(serverMQTT, portMQTT);
   clientMQTT.setCallback(callback);
   connectWIFI();
   delay(1000);
+  if (connectMQTT()) {
+    Serial.println("MQTT connected!!!");
+  }
+  delay(1000);
 }
 
 void processData() {
-  if (WiFi.status() == WL_CONNECTED) {
-    if(init_flag == false) {
-      init_flag = true;
+  if (stringComplete) {
+    if (WiFi.status() != WL_CONNECTED) {
+      reconnectWIFI();
+    }
 
-      boolean conectMQTT = false;
+    if (WiFi.status() == WL_CONNECTED) {
       if (!clientMQTT.connected()) {
-        // if (!clientMQTT.connect(idDevice, usernameMQTT, passwordMQTT)) {
-        if (!clientMQTT.connect(idDevice, usernameMQTT, passwordMQTT)) {
-          conectMQTT = false;
-        }
-        conectMQTT = true;
-      }
-      else {
-        conectMQTT = true;
+        connectMQTT();
       }
 
-      if(conectMQTT) {
-        if(clientMQTT.subscribe(TOPIC_SUBSCRIBE)) {
-          // Serial.println("Subscribe OK");
+      if (clientMQTT.connected()) {
+        if(clientMQTT.publish(TOPIC_PUBLISH, bufferData)) {
+          inputString = "";
+          stringComplete = false;
         }
       }
     }
-
-    if (stringComplete && clientMQTT.connected()) {
-      if(clientMQTT.publish(TOPIC_PUBLISH, bufferData)) {
-        inputString = "";
-        stringComplete = false;
-      }
-      init_flag = false;
-    }
-  }
-  else {
-    connectWIFI();
-    init_flag = false;
   }
   clientMQTT.loop();
 }
 
 void receiveData() {
   while (Serial.available()) {
-    // get the new byte:
     char inChar = (char)Serial.read();
-    // add it to the inputString:
     inputString += inChar;
-    // if the incoming character is a newline, set a flag
-    // so the main loop can do something about it:
+
     if (inChar == '\n') {
       inputString.toCharArray(bufferData, SIZE_BUFFER_DATA);
       stringComplete = true;
