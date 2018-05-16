@@ -14,7 +14,7 @@ LOGGER = logging.getLogger(__name__)
 bucket = 'residential_units'
 
 
-@jwtauth
+# @jwtauth
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
         self.db = db
@@ -43,8 +43,19 @@ class MainHandler(rest.BaseHandler):
                 self.set_status(400)
                 response = {"Error": "The object already exist"}
             else:
-                response = yield self.application.db.insert(bucket, self.json_args)
-                self.set_status(201)
+                tree = yield self.application.db.get("tree", self.json_args["security"])
+                toAppend = {"name":self.json_args["name"] , "children": []}
+                if tree is None:
+                    self.set_status(400)
+                    print(tree)
+                    response = {"Error": "There is no private security with the id provided"}
+
+                else:
+                    print("entra")
+                    response = yield self.application.db.insert(bucket, self.json_args)
+                    tree["data"]["children"].append(toAppend)
+                    self.application.db.update("tree", tree)
+                    self.set_status(201)
         else:
             self.set_status(400)
             response = "Error: Content-Type must be application/json"

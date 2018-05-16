@@ -11,11 +11,8 @@ import candax.rest as rest
 from candax.auth import jwtauth
 
 LOGGER = logging.getLogger(__name__)
-bucket = 'private_security'
-bucket_tree = 'tree'
+bucket = 'tree'
 
-
-# @jwtauth
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
         self.db = db
@@ -46,13 +43,6 @@ class MainHandler(rest.BaseHandler):
             else:
                 response = yield self.application.db.insert(bucket, self.json_args)
                 self.set_status(201)
-                new_RU = {}
-                data = {}
-                data['name'] =   self.json_args['company_name']
-                data['children'] = []
-                new_RU["key"] = self.json_args['key']
-                new_RU["data"] =  data
-                yield self.application.db.insert(bucket_tree, new_RU)
         else:
             self.set_status(400)
             response = "Error: Content-Type must be application/json"

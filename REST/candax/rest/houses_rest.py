@@ -14,7 +14,7 @@ LOGGER = logging.getLogger(__name__)
 bucket = 'houses'
 
 
-@jwtauth
+# @jwtauth
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
         self.db = db
@@ -43,8 +43,24 @@ class MainHandler(rest.BaseHandler):
                 self.set_status(400)
                 response = {"Error": "The object already exist"}
             else:
-                response = yield self.application.db.insert(bucket, self.json_args)
-                self.set_status(201)
+                resUnit = yield self.application.db.get("residential_units", self.json_args["res_unit"])
+                if(resUnit is None):
+                    self.set_status(400)
+                    response = {
+                        "Error": "There is no residential unit with the provided id."}
+                else:
+                    # se agrega al bucket
+                    response = yield self.application.db.insert(bucket, self.json_args)
+                    # se agrega al arbol
+                    tree = yield self.application.db.get("tree", resUnit["security"])
+                    for resUnitTree in tree["data"]["children"]:
+                        if resUnitTree["name"] == resUnit["name"]:
+                            resUnitTree["children"].append(
+                                {"name": self.json_args["key"]})
+                            break
+                    self.application.db.update("tree", tree)
+
+                    self.set_status(201)
         else:
             self.set_status(400)
             response = "Error: Content-Type must be application/json"
@@ -76,6 +92,22 @@ class MainHandler(rest.BaseHandler):
                 self.set_status(400)
                 objs = {"Error": "The object does not exist"}
             else:
+                # se borra del arbol 
+                resUnit = yield self.application.db.get("residential_units", objs["res_unit"])
+                tree = yield self.application.db.get("tree", resUnit["security"])
+                
+                for resUnitTree in tree["data"]["children"]:
+                        if resUnitTree["name"] == resUnit["name"]:
+                            cont = 0 
+                            for casita in resUnitTree["children"]:
+                                if casita["name"] == _id:
+                                    break
+                                cont += 1
+                            resUnitTree["children"].pop(cont)
+                            break
+                        
+                
+                self.application.db.update("tree", tree)
                 self.set_status(201)
         else:
             self.set_status(400)
