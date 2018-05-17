@@ -7,10 +7,15 @@ import A3 from './A3';
 import Img from './Img';
 import Img2 from './Img2';
 import Img3 from './Img3';
+import Img4 from './Img4';
+import Miembro1 from './Miembro1';
 
 import logoCan from 'images/candax.png';
 import logoYale from 'images/yaleLogo.png';
 import partnership from 'images/partnership.png';
+import miembros from 'images/miembros.png';
+
+import tefa from 'images/tefa.png';
 
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -35,7 +40,9 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
         <A2>  Somos un grupo de estudiantes de Ingeniería de Sistemas y Computación de la Universidad de los
         Andes interesados en el desarrollo de aplicaciones y su arquitectura. </A2>
 
-        <A3> AAA </A3>
+        <Img4 src={miembros}  />
+
+        <Miembro1 src={tefa} />
 
       </div>
 
