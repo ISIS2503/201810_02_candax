@@ -54,9 +54,18 @@ class MainHandler(rest.BaseHandler):
                     # se agrega al arbol
                     tree = yield self.application.db.get("tree", resUnit["security"])
                     for resUnitTree in tree["data"]["children"]:
-                        if resUnitTree["name"] == resUnit["name"]:
+                        if resUnitTree["attributes"]["name"] == resUnit["name"]:
                             resUnitTree["children"].append(
-                                {"name": self.json_args["key"]})
+                                                        {
+                                                        "name": self.json_args["key"],
+                                                        "nodeSvgShape": {
+                                                          "shape": "circle",
+                                                          "shapeProps": {
+                                                            "r": 10,
+                                                            "fill": "#04B4AE"
+                                                          }
+                                                        }}
+                                                        )
                             break
                     self.application.db.update("tree", tree)
 
@@ -92,21 +101,21 @@ class MainHandler(rest.BaseHandler):
                 self.set_status(400)
                 objs = {"Error": "The object does not exist"}
             else:
-                # se borra del arbol 
+                # se borra del arbol
                 resUnit = yield self.application.db.get("residential_units", objs["res_unit"])
                 tree = yield self.application.db.get("tree", resUnit["security"])
-                
+
                 for resUnitTree in tree["data"]["children"]:
                         if resUnitTree["name"] == resUnit["name"]:
-                            cont = 0 
+                            cont = 0
                             for casita in resUnitTree["children"]:
                                 if casita["name"] == _id:
                                     break
                                 cont += 1
                             resUnitTree["children"].pop(cont)
                             break
-                        
-                
+
+
                 self.application.db.update("tree", tree)
                 self.set_status(201)
         else:
