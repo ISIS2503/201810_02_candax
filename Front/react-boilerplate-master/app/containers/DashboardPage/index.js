@@ -29,7 +29,29 @@ import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+//css
+import './style/filterBar.css';
+
+
+const FilterNav = () =>(
+  <div className="filterBar">
+    <p>asdasd</p>
+  </div>
+);
+
 export class DashboardPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  
+  
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sidebarOpen: true
+    }
+
+    //this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+  }
+  
   /**
    * when initial state username is not null, submit the form to load repos
    */
@@ -48,33 +70,13 @@ export class DashboardPage extends React.PureComponent { // eslint-disable-line 
     };
 
     return (
-      <div>
-        <header className="neal-navbar-wrapper">
-          <nav className={_className}>
-            <div className="container">
-              <button className="navbar-toggler hidden-md-up" type="button" data-toggle="collapse"
-                data-target="#mobile-nav">
-                &#9776;
-              </button>
-              <a className="navbar-brand hidden-sm-down" href="/">{this.props.brand}</a>
-              <div className="navbar-toggleable-sm hidden-sm-down" id="header-nav">
-                <ul className="nav navbar-nav pull-right">
-                  {this.props.children}
-                </ul>
-              </div>
-              <div className="collapse navbar-toggleable-sm hidden-md-up neal-mobile-nav" id="mobile-nav">
-                <ul className="nav navbar-nav">
-                  {this.props.children}
-                </ul>
-              </div>
-            </div>
-          </nav>
-        </header>
-
+      <div className="dashContainer">
         <Helmet>
-          <title>Login</title>
-          <meta name="description" content="Application DashboardPage" />
+          <title>Candax dashboard</title>
+          <meta name="description" content="Application homepage" />
         </Helmet>
+        <FilterNav />
+      
       </div>
     );
   }
