@@ -17,17 +17,21 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
 
 
       <div>
-        <A>
+
         <ImgBack src={Banner} alt="react-boilerplate - Logo" />
         <Img src={logo} />
-        </A>
-        
+
+
         <NavBar>
           <HeaderLink to="/">
             <FormattedMessage {...messages.home} />
           </HeaderLink>
         </NavBar>
+
+
       </div>
+
+
     );
   }
 }

@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import NormalImg from 'components/Img';
 
 const Img = styled(NormalImg)`
-    margin-left: auto;
-    margin-right: auto;
     position: absolute;
-    top: 30px;
-    left: 550px;
-    text-align: center;
+    top: 800px;
+    left: 420px;
+    width: 150px;
+    height: 150px;
 `;
 
 export default Img;
