@@ -28,6 +28,7 @@ import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import Header from 'components/Header';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
@@ -53,6 +54,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           <title>Login</title>
           <meta name="description" content="A React.js Boilerplate application homepage" />
         </Helmet>
+        <Header/>
       
       </article>
     );
