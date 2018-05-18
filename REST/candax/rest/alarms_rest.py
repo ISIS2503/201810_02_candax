@@ -53,10 +53,10 @@ class MainHandler(rest.BaseHandler):
                 for resUnitTree in tree_obj['data']["children"]:
                     print(resUnitTree["name"] )
                     if resUnitTree["name"] == self.json_args['res_unit']:
-                        print('entroooooo')
                         for houseTree in resUnitTree["children"]:
                             if houseTree['name'] == self.json_args['house']:
-                                houseTree['nodeSvgShape']['shapeProps']['fill']='red'
+                                houseTree['nodeSvgShape']['shapeProps']['fill']= yield self.application.db.get_color(self.json_args['data'])
+                                print(houseTree['nodeSvgShape']['shapeProps']['fill'])
                                 print(tree_obj)
                                 yield self.application.db.update(bucket_tree, tree_obj)
 

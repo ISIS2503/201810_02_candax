@@ -138,3 +138,20 @@ class RiakDB:
                 ownerB = act
                 break
         return ownerB
+
+    @threadexecute
+    def get_color(self, type):
+        color="#04B4AE"
+        if(type.startswith("Number")):
+            color="#D7DF01"
+        elif (type.startswith("Motion")):
+            color="#FF8000"
+        elif (type.startswith("Door")):
+            color="#DF0101"
+        elif (type.startswith("Low")):
+            color="#0404B4"
+        elif (type.startswith("Cerradura")):
+            color="#04B45F"
+        elif (type.startswith("Hub")):
+            color="#088A08"
+        return color
