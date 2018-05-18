@@ -15,6 +15,7 @@ const customStyles = {
   }
 };
 
+
 class Detailed extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor () {
     super()
@@ -23,7 +24,7 @@ class Detailed extends React.Component { // eslint-disable-line react/prefer-sta
       modalIsOpen: false
     }
 
-    //axios.get('https://').then(response => this.setState({home: response.data});)
+    axios.get('http://localhost:8000/house_detail/H1').then(response => this.setState({home: response.data}))
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -46,21 +47,31 @@ class Detailed extends React.Component { // eslint-disable-line react/prefer-sta
   render() {
     return (
       <div>
+      <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
         <button onClick={this.openModal}>Open Modal</button>
         <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
+         isOpen={this.state.modalIsOpen}
+         onAfterOpen={this.afterOpenModal}
+         onRequestClose={this.closeModal}
+         style={customStyles}
+         contentLabel="Example Modal"
+       >
 
-          <A> smlkmslkm </A>
-
+         <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+         <div>I am a modal</div>
+         <form>
+           <input />
+           <button>tab navigation</button>
+           <button>stays</button>
+           <button>inside</button>
+           <button>the modal</button>
+         </form>
+         <button onClick={this.closeModal}>Close</button>
+       </Modal>
 
       </div>
     );
   }
 }
 
-export default Header;
+export default Detailed;

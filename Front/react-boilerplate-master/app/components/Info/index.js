@@ -9,6 +9,9 @@ import Img2 from './Img2';
 import Img3 from './Img3';
 import Img4 from './Img4';
 import Miembro1 from './Miembro1';
+import A4 from './A4';
+import Miembro2 from './Miembro2';
+import A5 from './A5';
 
 import logoCan from 'images/candax.png';
 import logoYale from 'images/yaleLogo.png';
@@ -16,6 +19,7 @@ import partnership from 'images/partnership.png';
 import miembros from 'images/miembros.png';
 
 import tefa from 'images/tefa.png';
+import juliana from 'images/juliana.png';
 
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -43,6 +47,11 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
         <Img4 src={miembros}  />
 
         <Miembro1 src={tefa} />
+        <A4>Stephannie Jimenez</A4>
+        <Miembro2 src={juliana} />
+        <A5>Juliana Jaime</A5>
+        
+        <A3>cnksndkjcn</A3>
 
       </div>
 
