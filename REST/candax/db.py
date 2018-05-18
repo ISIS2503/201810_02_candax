@@ -128,3 +128,30 @@ class RiakDB:
                 print('aaaa')
                 ret.append(act)
         return ret
+    @threadexecute
+    def get_house_detail(self, request_id):
+        ownersB = self.client.bucket('owners')
+        ownerB ={}
+        for key in ownersB.get_keys():
+            act = ownersB.get(key).data
+            if(act['house'] == request_id):
+                ownerB = act
+                break
+        return ownerB
+
+    @threadexecute
+    def get_color(self, type):
+        color="#04B4AE"
+        if(type.startswith("Number")):
+            color="#D7DF01"
+        elif (type.startswith("Motion")):
+            color="#FF8000"
+        elif (type.startswith("Door")):
+            color="#DF0101"
+        elif (type.startswith("Low")):
+            color="#0404B4"
+        elif (type.startswith("Cerradura")):
+            color="#04B45F"
+        elif (type.startswith("Hub")):
+            color="#088A08"
+        return color
