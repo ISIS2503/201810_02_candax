@@ -3,10 +3,9 @@ import NormalA from 'components/A';
 const A = NormalA.extend`
 
   position: absolute;
-    bottom: 575px;
-    left: 210px;
+    bottom: 525px;
+    left: 280px;
     color: black;
-    font-weight: bold;
 `;
 
 export default A;
