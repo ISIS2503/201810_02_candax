@@ -44,7 +44,7 @@ class MainHandler(rest.BaseHandler):
                 response = {"Error": "The object already exist"}
             else:
                 tree = yield self.application.db.get("tree", self.json_args["security"])
-                toAppend = {"name":self.json_args["name"] , "children": []}
+                toAppend = {"name":self.json_args["key"] ,  "attributes": {"name":self.json_args["name"]  }, "children": []}
                 if tree is None:
                     self.set_status(400)
                     print(tree)

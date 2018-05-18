@@ -45,7 +45,7 @@ class MainHandler(rest.BaseHandler):
                 self.set_status(201)
         else:
             self.set_status(400)
-            response = "Error: Content-Type must be application/json"
+            response = {"Error": "Content-Type must be application/json"}
         self.set_header('Content-Type', 'text/javascript;charset=utf-8')
         self.write(response)
 
@@ -57,8 +57,13 @@ class MainHandler(rest.BaseHandler):
                 self.set_status(400)
                 objs = {"Error": "The object does not exist"}
             else:
-                objs = yield self.application.db.update(bucket, self.json_args)
                 self.set_status(201)
+                for resUnitTree in objs["data"]["children"]:
+                    if resUnitTree["name"] == self.json_args['res_unit']:
+                        for houseTree in resUnitTree["children"]:
+                            if houseTree['name'] == self.json_args['house']:
+                                houseTree['nodeSvgShape']['shapeProps']['fill']="#04B4AE"
+                                yield self.application.db.update(bucket, objs)
         else:
             self.set_status(400)
             objs = {"Error": "No content type"}
