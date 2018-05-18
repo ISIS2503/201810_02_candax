@@ -28,6 +28,11 @@ class BaseHandler(tornado.web.RequestHandler):
         self.db = db
         self.riak_url = self.application.riak_url
 
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
     def prepare(self):
         if 'Content-Type' in self.request.headers:
             if self.request.headers["Content-Type"].startswith("application/json"):
