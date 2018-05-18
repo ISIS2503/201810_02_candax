@@ -39,7 +39,7 @@ import candax.rest.month_houses_rest as month_houses_rest
 import candax.rest.alarms_silence_rest as alarms_silence_rest
 import candax.rest.tree_rest as tree_rest
 import candax.rest.houses_detail_rest as house_detail_rest
-
+import candax.rest.ws as ws
 
 # import candax.rest as rest
 
@@ -66,7 +66,8 @@ REST = [
     (r'/month/houses/?(.+)?', month_houses_rest.MainHandler),
     (r'/silence(/?(.+)?)', alarms_silence_rest.MainHandler),
     (r'/tree(/?(.+)?)', tree_rest.MainHandler),
-    (r'/house_detail(/?(.+)?)', house_detail_rest.MainHandler)
+    (r'/house_detail(/?(.+)?)', house_detail_rest.MainHandler),
+    (r'/socket', ws.SocketHandler)
 ]
 
 # Define new web rendering route associations

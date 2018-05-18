@@ -9,6 +9,7 @@ import tornado.web
 import tornado.escape
 import candax.rest as rest
 from candax.auth import jwtauth
+from candax.rest.ws import ws_clients as ws_clients
 
 LOGGER = logging.getLogger(__name__)
 bucket = 'alarms'
@@ -59,7 +60,8 @@ class MainHandler(rest.BaseHandler):
                                 print(houseTree['nodeSvgShape']['shapeProps']['fill'])
                                 print(tree_obj)
                                 yield self.application.db.update(bucket_tree, tree_obj)
-
+                for c in ws_clients:
+                    c.write_message(tree_obj['data'])
 
         else:
             self.set_status(400)
