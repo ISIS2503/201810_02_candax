@@ -4,9 +4,8 @@ const A = NormalA.extend`
 
   position: absolute;
     bottom: 575px;
-    left: 210px;
+    left: 290px;
     color: black;
-    font-weight: bold;
 `;
 
 export default A;
