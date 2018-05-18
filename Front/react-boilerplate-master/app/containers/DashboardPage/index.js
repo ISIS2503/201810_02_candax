@@ -28,14 +28,30 @@ import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { Button } from 'react-bootstrap';
 
 //css
 import './style/filterBar.css';
 
 
+
+
 const FilterNav = () =>(
   <div className="filterBar">
-    <p>asdasd</p>
+    <div className="Candax">
+      <h1>CANDAX</h1>
+    </div>
+    <hr/>
+
+    <div className="vertical-menu">
+      <a href="#" class="active">Home</a>
+      <a href="#">Filtro 1</a>
+      <a href="#">Filtro 2</a>
+      <a href="#">Filtro 3</a>
+      <a href="#">Filtro 4</a>
+    </div>
+
+
   </div>
 );
 
@@ -70,13 +86,13 @@ export class DashboardPage extends React.PureComponent { // eslint-disable-line 
     };
 
     return (
-      <div className="dashContainer">
+      <div>
         <Helmet>
           <title>Candax dashboard</title>
           <meta name="description" content="Application homepage" />
         </Helmet>
         <FilterNav />
-      
+        <h1>Aqui va el grafo</h1>
       </div>
     );
   }
