@@ -128,3 +128,13 @@ class RiakDB:
                 print('aaaa')
                 ret.append(act)
         return ret
+    @threadexecute
+    def get_house_detail(self, request_id):
+        ownersB = self.client.bucket('owners')
+        ownerB ={}
+        for key in ownersB.get_keys():
+            act = ownersB.get(key).data
+            if(act['house'] == request_id):
+                ownerB = act
+                break
+        return ownerB
