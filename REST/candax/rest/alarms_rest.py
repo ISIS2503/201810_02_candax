@@ -12,9 +12,10 @@ from candax.auth import jwtauth
 
 LOGGER = logging.getLogger(__name__)
 bucket = 'alarms'
+bucket_tree = 'tree'
+bucket_RU = 'residential_units'
+bucket_PS = 'private_security'
 
-
-# alarm = {'house': ; 'res_unit': ; 'hub': ; 'lock': ; 'date':}
 @jwtauth
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
@@ -46,6 +47,20 @@ class MainHandler(rest.BaseHandler):
             else:
                 response = yield self.application.db.insert(bucket, self.json_args)
                 self.set_status(201)
+                res_unit =  yield self.application.db.get(bucket_RU, self.json_args['res_unit'])
+                private_security = res_unit['security']
+                tree_obj =  yield self.application.db.get(bucket_tree, private_security)
+                for resUnitTree in tree_obj['data']["children"]:
+                    print(resUnitTree["name"] )
+                    if resUnitTree["name"] == self.json_args['res_unit']:
+                        for houseTree in resUnitTree["children"]:
+                            if houseTree['name'] == self.json_args['house']:
+                                houseTree['nodeSvgShape']['shapeProps']['fill']= yield self.application.db.get_color(self.json_args['data'])
+                                print(houseTree['nodeSvgShape']['shapeProps']['fill'])
+                                print(tree_obj)
+                                yield self.application.db.update(bucket_tree, tree_obj)
+
+
         else:
             self.set_status(400)
             response = "Error: Content-Type must be application/json"
