@@ -10,6 +10,7 @@ import tornado.escape
 import candax.rest as rest
 from candax.auth import jwtauth
 from candax.rest.ws import ws_clients as ws_clients
+from candax.rest.ws_alarms import ws_clients_alarms as ws_clients_alarms
 
 LOGGER = logging.getLogger(__name__)
 bucket = 'alarms'
@@ -17,7 +18,7 @@ bucket_tree = 'tree'
 bucket_RU = 'residential_units'
 bucket_PS = 'private_security'
 
-@jwtauth
+# @jwtauth
 class MainHandler(rest.BaseHandler):
     def initialize(self, db=None):
         self.db = db
@@ -62,6 +63,8 @@ class MainHandler(rest.BaseHandler):
                                 yield self.application.db.update(bucket_tree, tree_obj)
                 for c in ws_clients:
                     c.write_message(tree_obj['data'])
+                for ca in ws_clients_alarms:
+                    ca.write_message(self.json_args)
 
         else:
             self.set_status(400)
