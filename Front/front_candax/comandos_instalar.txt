@@ -1,0 +1,8 @@
+//ARBOL
+npm install react-bootstrap-validtion --save
+npm install axios -S
+npm install --save react react-dom
+npm install --save react-bootstrap      
+bower install react
+bower install react-bootstrap
+                
